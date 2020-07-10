@@ -56,17 +56,50 @@
 
 ## [@ F] Functional Requirement
 
+### Main Goals
+
 | @ReqtID | Name | Text |
 | ------- | ---- | ---- |
 | F1-gh000      | \<\<functionalRequirement>><br>Change driven | 変更要求を起点に短サイクルで開発作業が実行される、変更駆動型に実装したA-SPICEプロセスであること
 | | @Rationale  |
 | | @Trace      | G.G1.1-gh000, S.S4-gh000
-| F2-gh000      | \<\<functionalRequirement>><br>Simple interface | 上位システム開発マスタープラン、\n上位プロジェクトマネジメントと、\n素直に接続可能であること
+| F2-gh000      | \<\<functionalRequirement>><br>Simple interface | 上位システム開発マスタープラン、上位プロジェクトマネジメントと、素直に接続可能であること
 | | @Rationale  |
 | | @Trace      | G.G1.2-gh000, S.S4-gh000
-| F3-gh000      | \<\<functionalRequirement>><br>Scrum | Scrum 運用も可能な\n内部プロセスであること
+| F3-gh000      | \<\<functionalRequirement>><br>Scrum | Scrum 運用も可能な内部プロセスであること
 | | @Rationale  |
 | | @Trace      | G.G1.1-gh000, S.S2-gh000
+
+### Context
+
+#### ユーザー観点
+
+- 上位システム開発マスタープランとの接続をシンプルにするため、まず上位側からみたユーザーシナリオを定めた。
+- また、上位マスタープランのモデルを定めこれを前提する。
+- 以上から、ユーザーから見たユースケースを抽出する土台とする。
+
+#### システムアーキテクチャ観点
+
+- 次にアーキテクチャへの検討を加える。本来アーキテクチャ設計書（SYS.3）にて検討するべき内容ではあるが、システムの挙動をモデリングするためにある程度のシステムモデリングを行う。
+- また、クライアントからみたサプライヤー内部にソフトウェア開発チームから見た複数のステークホルダーが存在するため、上記モデリングが必要となる。
+- アクターとして、4種類のチームを想定する。
+  - システム開発部がとりまとめる、HWチームがとりまとめる、SWが取りまとめる（セールスがラッパーになる）など大きく３パターンがあるが、いずれにせよ上位プロジェクトが存在する。
+  - 上位プロジェクトがシステムエンジニアリングをどこまでやってくれるかはケースによる（SWとしては情報をもらうだけでいいのか、または自分でやるのか）
+  - クライアントは通常上位プロジェクトの外に存在するが、社内プロジェクトの場合には上位プロジェクトチームと一致する場合もある。
+  - 4種類のチーム全てを含めて、ステークホルダーとする。
+- 製品開発プロジェクトの標準パターンを定める。
+  - ES、共同テストなどの用語を定める
+  - 開発プロジェクトの大きな流れを定める
+
+#### Activity diagram
+
+- [ ] Supplyer → Supplier
+- [ ] Client はどうしよう。顧客のほうが自然か。acquirer がよさげ（@33001）
+- [ ] SW Engineering へ変更する。
+- [ ] プロジェクトの3階層（Customer project、Supplier project、Software project）
+
+![file:/Process model/Ghost-process20200527(1).eapx:User Scenario/User Scenario](./fig/User_Scenario.png)
+
 
 ### [@ #nest F1] Change driven development process
 
@@ -114,7 +147,7 @@
 
 | @ReqtID | Name | Text |
 | ------- | ---- | ---- |
-| C1-gh000      | Usability | テキストベースで理解可能\nであるよう、構成規模および用語\n辞書規模ができるだけ小さいこと
+| C1-gh000      | Usability | テキストベースで理解可能であるよう、構成規模および用語辞書規模ができるだけ小さいこと
 | | @Rationale  |
 | | @Trace      | S.S1-gh000, S.S3-gh000
 
@@ -122,12 +155,73 @@
 
 | @ReqtID | Name | Text |
 | ------- | ---- | ---- |
-| N1-gh000      | \<\<nonFunctionalRequirement>><br>A-SPICE Level3 | Automotive SPICE 3.1 Level 3\n相当のプロセスであること
+| N1-gh000      | \<\<nonFunctionalRequirement>><br>A-SPICE Level3 | Automotive SPICE 3.1 Level 3相当のプロセスであること
 | | @Rationale  |
 | | @Trace      | S.S4-gh000
-| N2-gh000      | \<\<nonFunctionalRequirement>><br>A-SPICE VDA Scope | Automotive SPICE の\nVDA Scope をカバーすること
+| N2-gh000      | \<\<nonFunctionalRequirement>><br>A-SPICE VDA Scope | Automotive SPICE のVDA Scope をカバーすること
 | | @Rationale  |
 | | @Trace      | S.S4-gh000
 
+[Automotive SPICE Requirement Analysis Version 1.1.0](https://docs.google.com/spreadsheets/d/1d8Ape4tjnYrs0BlzwShg9jB5Lbrm1BTp-8rOd5me9es/)
+
 ## [@ D] Domain Knowledge
+
+### プロセス定義対象範囲について
+
+プロセステンプレートをテーラーリングしたプロセスを、プロジェクトにおいて実行する。
+
+#### プロジェクトの位置づけ
+
+3階層。
+
+1. Acquirer project
+2. Supplier project
+3. Software project  ← これが対象。
+
+#### Software project team の構成
+
+独立した2チームによる構成。
+
+1. SW Engineering team
+2. SW QA team
+
+- Ghostは 1 + 2 の両方を含む defined process だが、3.1 中心で 3.2 は薄め。
+- とはいえ、小さな企業では SQA にも困っているのではないか？
+
+
+### プロセスの目的について
+
+目的に照らして指標があり、成熟度の計測が成立する。
+指標のもとになっている目的と指標を簡単に整理したい。
+
+最上位には製品開発全体の品質管理があるので、その部分としてのソフトウェア品質管理を簡単に説明すればよいか。
+
+
+
+### プロジェクトの用語について
+
+PMBOK + SCRUM から、できるだけ少数の用語を採用する。
+
+#### PMBOK
+
+- ５プロセス
+
+#### SCRUM
+
+1. Epic
+2. Task
+3. Subtask
+
+- Sprint などの運用については言及しない方針
+
+- User story、Product backlog などの概念はエンジニアリングの手法として位置付ける？ PB は単に Feature でもよいかもしれない。
+
+
+### その他の用語
+
+ASPICE 同様、33001 を参照する。
+
+- [ ] 読む。<br>http://www.kikakurui.com/x3/X33001-2017-01.html
+
+> 取得者（acquirer）= 供給者から，製品又はサービスを，取得又は調達する利害関係者。
 
