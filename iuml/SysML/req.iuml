@@ -1,0 +1,70 @@
+'
+'
+'
+@startuml req
+
+hide circle
+hide empty members
+hide method
+
+!procedure $req($name, $txt, $label, $id="")
+    class "$name" as $label <<requirement>> {
+        !if ($id == "")
+            Id = $label
+        !else
+            Id=$id
+        !endif
+        Text = $txt
+    }
+!endfunction
+
+!procedure $freq($name, $txt, $label, $id="")
+    class "$name" as $label <<functionalRequirement>> {
+        !if ($id == "")
+            Id = $label
+        !else
+            Id=$id
+        !endif
+        Text = $txt
+    }
+!endfunction
+
+!procedure $nfreq($name, $txt, $label, $id="")
+    class "$name" as $label <<nonFunctionalRequirement>> {
+        !if ($id == "")
+            Id = $label
+        !else
+            Id=$id
+        !endif
+        Text = $txt
+    }
+!endfunction
+
+!procedure $dcnstr($name, $txt, $label, $id="")
+    class "$name" as $label <<designConstraint>> {
+        !if ($id == "")
+            Id = $label
+        !else
+            Id=$id
+        !endif
+        Text = $txt
+    }
+!endfunction
+
+!procedure $nest($x, $y)
+    $x +-- $y
+!endfunction
+
+!procedure $derive($x, $y)
+    $x <.. $y : <<deriveReqt>>
+!endfunction
+
+!procedure $refine($x, $y)
+    $x <.. $y : <<refine>>
+!endfunction
+
+!procedure $derivel($x, $y)
+    $x <.. $y : <<deriveReqt>> link
+!endfunction
+
+@enduml

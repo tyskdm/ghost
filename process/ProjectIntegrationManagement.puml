@@ -1,0 +1,167 @@
+' # [@ GHOST.PJIM] Project Integration Management Process
+'
+' ### 4.1. [@activity] Main
+'
+@startuml Main
+
+skinparam monochrome    true
+skinparam shadowing     false
+skinparam PartitionBorderThickness 1
+skinparam ActivityBarColor dimgrey
+
+' Roles
+| Project Manager |
+| Deliverables |
+
+' Activities
+| Project Manager |
+
+start
+
+:T1. Initiation( );
+
+repeat
+    :T2. Planning( );
+
+    | Deliverables |
+        note right
+        Project Plan
+        ----
+        * Calling the method ""foo( )"" is prohibited
+        end note
+    | Project Manager |
+
+    repeat  :T3. Execution( );
+        :T4. Monitoring( );
+
+        if (B1. all Done?) then (Yes)
+            (e)
+        else (No)
+        endif
+
+    repeat while (B2. Deviation?) is (No)
+
+backward :T5. Controlling( );
+
+repeat while ( ) is (Some deviation from the plan)
+detach
+
+:A1. onExit<
+
+(e)
+
+:T6. Closing( );
+
+| Deliverables |
+    note right
+    Project Plan
+    ----
+    * Calling the method ""foo( )"" is prohibited
+    end note
+| Project Manager |
+
+stop
+
+@enduml
+
+
+'
+' ### 4.2. [@activity] Initiation
+'
+@startuml Initiate
+
+skinparam monochrome    true
+skinparam shadowing     false
+skinparam PartitionBorderThickness 1
+skinparam ActivityBarColor dimgrey
+
+' Roles
+| Project Manager |
+| Deliverables |
+
+' Activities
+| Project Manager |
+start
+
+repeat
+
+fork
+    :T1. Initiate PJM;
+fork again
+    :T2. Initiate SWE;
+fork again
+    :T3. Initiate SQA;
+endfork
+
+:T4. Adjust to integrate;
+| Deliverables |
+    note right
+    D2. Integrated Project Plan
+    ----
+    * Calling the method ""foo( )"" is prohibited
+    end note
+| Project Manager |
+
+repeat while (B1. OK?) is (No)
+
+:T5. Estimate the project;
+
+partition "Infra" {
+    :T6. Initiate WPM;
+    :T7. Initiate ISM;
+}
+
+:T8. Criate initial baseline of
+Project plan and estimation;
+
+stop
+
+
+@enduml
+
+'
+' ### 4.3. [@activity] Planning
+'
+@startuml Planning
+
+skinparam monochrome    true
+skinparam shadowing     false
+skinparam PartitionBorderThickness 1
+skinparam ActivityBarColor dimgrey
+
+' Roles
+| Project Manager |
+| Deliverables |
+
+' Activities
+| Project Manager |
+start
+
+repeat
+
+fork
+    :T1. Plan PJM;
+fork again
+    :T2. Plan SWE;
+fork again
+    :T3. Plan SQA;
+endfork
+
+:T4. Adjust to integrate;
+| Deliverables |
+    note right
+    D2. Integrated Project Plan
+    ----
+    * Calling the method ""foo( )"" is prohibited
+    end note
+| Project Manager |
+
+repeat while (B1. OK?) is (No)
+
+:T5. Estimate the project;
+
+stop
+
+
+@enduml
+

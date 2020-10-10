@@ -1,0 +1,400 @@
+' # [@ GHOST.PJIM] Project Integration Management Process
+'
+' ### 4.1. [@activity] Main
+'
+@startuml Domain_WorkProduct
+
+!include style.iuml
+!include SysML/bdd.iuml
+
+class "Work product" as WP <<domain>> {
+    an artifact from a process execution.
+    ---
+    : objectiveType
+    : managementType
+}
+
+' package "Objective type" {
+    class ": objectiveType" as OT <<enumeration>> {
+        Deliverable
+        Quality Record
+    }
+
+    class "Deliverable" as D <<domain>> {
+        an artifact from a process execution.
+    }
+
+    class "Quality Record" as QR <<domain>> {
+        an artifact from a process execution.
+    }
+
+    OT -down- D
+    OT -down- QR
+    WP -down- OT
+' }
+
+
+' package "Control type" {
+    class ": managementType" as CT <<enumeration>> {
+        Configuration item
+        Recording item
+    }
+
+    class "Configuration item" as CI <<domain>> {
+        an artifact from a process execution.
+    }
+
+    class "Recording item" as RI <<domain>> {
+        an artifact from a process execution.
+    }
+
+    CT -down- CI
+    CT -down- RI
+    WP -down- CT
+' }
+
+' package "Control system" {
+    class "Configuration management System" as CMS <<domain>> {
+        an artifact from a process execution.
+    }
+
+    class "Recording management System" as RMS <<domain>> {
+        an artifact from a process execution.
+    }
+
+    CI --- CMS
+    RI --- RMS
+' }
+
+' package "Deliverables" {
+    class "Project item" as PI <<domain>> {
+        an artifact from a process execution.
+    }
+
+    class "Application Parameter" as AP <<domain>> {
+        an artifact from a process execution.
+    }
+
+    class "Software item" as SI <<domain>> {
+        an artifact from a process execution.
+    }
+
+    D -down- PI
+    D -down- AP
+    D -down- SI
+    CI *-- AP
+    CI *-- SI
+' }
+
+@enduml
+
+
+' ### 4.1. [@activity] Main
+'
+@startuml Workproduct
+
+!include style.iuml
+!include SysML/bdd.iuml
+
+class "Work product" as WP <<domain>> {
+    an artifact from a process execution.
+    ---
+    : objectiveType
+    : managementType
+    workproductType
+    verificationLevel
+    status
+    version
+}
+
+@enduml
+
+
+' ### 4.1. [@activity] Main
+'
+@startuml WorkProductTemplate
+
+!include style.iuml
+!include SysML/bdd.iuml
+
+class "Work product" as WP <<domain>> {
+    an artifact from a process execution.
+    ---
+    : objectiveType
+    : managementType
+    workproductType
+    verificationLevel
+    status
+    version
+}
+
+class "workproductType" as WT <<enumeration>> {
+    Project Plan,
+    Software Requirement,
+    Software Architectual design,
+    Software Detailed design,
+    Acceptance Review record, ...
+}
+WP -down- WT
+
+class "Workproduct Template" as WPT <<domain>> {
+    workproducType
+    templateFile
+    verificationCriteria
+}
+WT -down- WPT
+
+class "Template File" as TF <<domain>> {
+    an artifact from a process execution.
+}
+WPT -down- TF
+
+class "Verification Criteria" as VC <<domain>> {
+    an artifact from a process execution.
+}
+WPT -down- VC
+
+class "Work product Types List" as WTL <<domain>> {
+    an artifact from a process execution.
+}
+WT -right- WTL
+
+class "Deliverables List" as DL <<domain>> {
+    Only deliverables placed on list.
+}
+WP -right- DL
+
+@enduml
+
+
+' ### 4.1. [@activity] Main
+'
+@startuml WorkproductStates
+
+!include style.iuml
+hide empty description
+
+[*] --> Created : Create
+
+state Created {
+    [*] --> Working
+    Working : The item is under editing\nor development.
+
+    Working -right-> Reviewing : Request review
+    Reviewing : The item is under revie against\nthe defined requirements.
+
+    Reviewing -left-> Working  : Reject
+
+    Reviewing -down-> Approved : Approve
+    Approved : The item is approved to be recorded or baselined.
+
+    Approved --> Working       : Reopen
+
+    Approved --> Released      : Release
+    Released : The item is released or under preparing for that.
+    Released : It is locked and cannot be edited, changed, or deleted.
+}
+
+Created --> Deleted : Delete
+
+@enduml
+
+
+' ### 4.1. [@activity] Main
+'
+@startuml WorkproductRepository
+
+!include style.iuml
+
+hide circle
+hide empty members
+
+' package "bdd Configuration Management System" <<Frame>> {
+
+    package "Git Hosting service" as REPO <<Package>> {
+
+        class Repository <<domain>> {
+            Configuration managed object store.
+        }
+
+        class Branch <<domain>> {
+            Branch represent Workproduct state.
+        }
+
+        class Commit <<domain>> {
+            Commit-id is used as version.
+        }
+
+        class WorkProduct <<domain>> {
+            note:
+            Work product itself DO NOT contain its version nor state.
+            They are identified by the branches and commits.
+        }
+
+        Repository *-- Commit
+        Branch o-- Commit
+        Repository *-- Branch
+        Commit *-- WorkProduct
+    }
+
+    class "Change Controll Process" as CCP <<domain>> {
+        Checkout()
+        Create item()
+        Dlete item()
+        Request Checkin()
+        Accept Checkin()
+        Release()
+    }
+    ' CCP -down- Repository
+    Repository -right- CCP
+
+    class "Maintenance Process" as MP <<domain>> {
+    }
+    ' Repository -right- MP
+    REPO -left- MP
+
+    class "Configuration Status" as CS <<domain>> {
+        Working - feature/*
+        Reviewing
+        Accepted - develop
+        Released - master
+    }
+    Branch -right- CS
+
+    class "Configuration Version" as CV <<domain>>
+    Commit -right- CV
+' }
+
+@enduml
+
+
+' ### 4.1. [@activity] Main
+'
+@startuml WorkproductVersioning
+
+!include style.iuml
+
+hide circle
+hide empty members
+
+
+@enduml
+
+
+' ### 4.1. [@activity] Main
+'
+@startuml ConfigurationStates
+
+!include style.iuml
+hide empty description
+
+[*] -right-> Created : Create(item)
+
+state Created {
+    [*] --> Working
+    Working : [ feature branch ]
+    Working : Configuration items are edited or
+    Working : developed on feature branch.
+
+    Working -right-> Reviewing : CreatePullrequest(develop, feature)
+    Reviewing : [ feature branch ] (pull requesting)
+    Reviewing : Configuration items are reviwed using pull
+    Reviewing : request against the defined requirements.
+
+    Reviewing -left-> Working  : ClosePullrequest()
+
+    Reviewing -down-> Approved : MergePullrequest(develop, feature)
+    Approved : [ develop branch ]
+    Approved : Only approved branch containing configuration items is
+    Approved : merged into the develop branch. So develop branch is
+    Approved : always approved, and each commit is always baselined.
+
+    Approved --> Working       : CreateBranch(feature)
+
+    state "Released (work product)" as R {
+
+        Approved --> Prepairing    : CreateBranch(release)
+        state "Prepairing release package" as Prepairing
+        Prepairing : [ release branch ]
+        Prepairing : - Add release documentation/release note defined by ReleaseProcess.
+        Prepairing : - Prepare to get approval for delivery (if any additional items are necessary).
+
+        Prepairing --> RRA     : CreatePullrequest(master, relsease)
+        state "Reviewing for release approval" as RRA
+        RRA: [ release branch ] (pull requesting)
+        RRA: - Review configuration items as release package.
+
+        RRA --> Released : MergePullrequest(master, release)
+
+        state "Released (release package)" as Released
+        Released : [ master branch ]
+        Released : The approved release package is stored\n into the master branch.
+    }
+}
+
+Working -left-> Deleted : Delete(item)
+
+    ' Released : The item is released or under preparing for that.
+    ' Released : It is locked and cannot be edited, changed, or deleted.
+
+@enduml
+
+
+' ### 4.1. [@activity] Main
+'
+@startuml RecordingItemsStates
+
+!include style.iuml
+hide empty description
+
+[*] -right-> Created : Create(item)
+
+state Created {
+    [*] --> Working
+    Working : [ feature branch ]
+    Working : Configuration items are edited or
+    Working : developed on feature branch.
+
+    Working -right-> Reviewing : CreatePullrequest(develop, feature)
+    Reviewing : [ feature branch ] (pull requesting)
+    Reviewing : Configuration items are reviwed using pull
+    Reviewing : request against the defined requirements.
+
+    Reviewing -left-> Working  : ClosePullrequest()
+
+    Reviewing -down-> Approved : MergePullrequest(develop, feature)
+    Approved : [ develop branch ]
+    Approved : Only approved branch containing configuration items is
+    Approved : merged into the develop branch. So develop branch is
+    Approved : always approved, and each commit is always baselined.
+
+    Approved --> Working       : CreateBranch(feature)
+
+    state "Released (work product)" as R {
+
+        Approved --> Prepairing    : CreateBranch(release)
+        state "Prepairing release package" as Prepairing
+        Prepairing : [ release branch ]
+        Prepairing : - Add release documentation/release note defined by ReleaseProcess.
+        Prepairing : - Prepare to get approval for delivery (if any additional items are necessary).
+
+        Prepairing --> RRA     : CreatePullrequest(master, relsease)
+        state "Reviewing for release approval" as RRA
+        RRA: [ release branch ] (pull requesting)
+        RRA: - Review configuration items as release package.
+
+        RRA --> Released : MergePullrequest(master, release)
+
+        state "Released (release package)" as Released
+        Released : [ master branch ]
+        Released : The approved release package is stored\n into the master branch.
+    }
+}
+
+Working -left-> Deleted : Delete(item)
+
+    ' Released : The item is released or under preparing for that.
+    ' Released : It is locked and cannot be edited, changed, or deleted.
+
+@enduml
+
