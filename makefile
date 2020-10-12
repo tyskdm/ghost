@@ -1,20 +1,25 @@
-.PHONY: clean clean_puml
+.PHONY: clean puml_clean puml_img
 
 # 1. Plant UML Settings
 ## directories
-PUMLSRC     :=
-PUMLPNG     := 
-## extention
-PUMLEXT     := puml
+PUMLSRC     := .
 ## flags
-PUMLFLAGS   := -Wall -g -std=c++14
+PUMLFLAGS   :=
 
-####################
+puml_img:
+	@find $(PUMLSRC) \( -name *.puml -or -name *.pu \) | while read line; \
+    do \
+		echo puml_img: $$line; \
+	 	dir=$${line%.*}; \
+		dir=$$(basename "$$dir"); \
+		plantuml -o "./$$dir" $$PUMLFLAGS "$$line"; \
+	done
 
-clean_puml:
-	@find $(PUMLSRC) -name *.puml -printf "%p\n" | while read line; \
+puml_clean:
+	@find $(PUMLSRC) \( -name *.puml -or -name *.pu \) | while read line; \
     do \
 	 	dir=$${line%.*}; \
-		dir=$${dir#./}; \
-		$(RM) -rf "$(PUMLPNG)$$dir"; \
+		$(RM) -rf "$$dir"; \
 	done
+
+clean: puml_clean

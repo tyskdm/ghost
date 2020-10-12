@@ -3,7 +3,7 @@
 '
 @startuml System_Requirements_Overview
 
-!include ./sysml/req.iuml
+!include SysML/req.iuml
 
 package "req [package] System Requirements [Overview]  " <<Frame>> {
     package "Goal " as G {
