@@ -2,7 +2,7 @@
 
 ## Overview
 
-![../puml/System_Requirements_Overview.puml](./fig/System_Requirements_Overview.png)
+![../puml/System_Requirements_Overview.puml](./System_Requirements/System_Requirements_Overview.png)
 
 ## [@ G] Goal
 
