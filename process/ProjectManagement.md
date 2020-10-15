@@ -1,112 +1,223 @@
-# [@ PROC.PJM] Project Management Process
+# [@Ghost PJIM] Project Integration Management Process
 
-| MAN.3 | Project management |
-| ----- | ------------------ |
-| Purpose | プロジェクト管理プロセスの目的は、プロジェクトの要件および制約内で、プロジェクトが製品を生成するために必要な活動およびリソースを識別し、確立し、制御することである
-| Outcomes | 1) プロジェクトの作業範囲が定義されている。<br>2) 利用可能なリソースおよび制約内でプロジェクト目標達成の実現可能性が評価されている。<br>3) 作業を完了するために必要な活動およびリソースが分類され、見積られている。<br>4) プロジェクト内の窓口、ならびに他のプロジェクトおよび組織部門との窓口が識別され、監視されている。<br>5) プロジェクトの実行計画が策定され、実装され、維持されている。<br>6) プロジェクトの進捗が監視され、報告されている。<br>7) プロジェクトの目標が達成されない場合、是正処置が講じられ、プロジェクトで識別された問題の再発が予防されている。
+[@gdoc 0.6, @type ghost 0.3]
 
-## Sub processes
+## 1. Description
 
-- Initiating phase
+## 2. [@ R] ROLES
 
-MAN.3.BP1: 作業範囲の定義 [1]
-MAN.3.BP2: プロジェクトのライフサイクルの定義 [2]
-MAN.3.BP3: プロジェクトの実現可能性の評価 [2]
+## 3. [@ W] WORK PRODUCTS
 
-- Planning phase
+## 4. [@ A] ACTIVITIES
 
-MAN.3.BP4: プロジェクト活動の定義、監視、および調整 [3, 5, 7]
-MAN.3.BP5: プロジェクトの見積りおよびリソースの定義、監視、および調整 [2, 3, 7]
-MAN.3.BP6: 必要となるスキル、知識、および経験の確保 [3, 7]
-MAN.3.BP7: プロジェクトの窓口および合意したコミットメントの識別、監視、および調整 [4, 7]
-MAN.3.BP8: プロジェクトスケジュールの定義、監視、および調整 [3, 5, 7]
+### 4.1. [@activity] Initiate
 
-- Execution phase
+#### _[@P] PURPOSE_
 
-MAN.3.BP6: 必要となるスキル、知識、および経験の確保 [3, 7]
+- プロジェクトマネジメント観点から情報収集し、プロジェクト憲章・マネジメント戦略の策定を行う。
 
-- Monitoring and Controlling phase
+#### _[@E] ENTRY CRITERIA / INPUT_
 
-MAN.3.BP4: プロジェクト活動の定義、監視、および調整 [3, 5, 7]
-MAN.3.BP5: プロジェクトの見積りおよびリソースの定義、監視、および調整 [2, 3, 7]
-MAN.3.BP7: プロジェクトの窓口および合意したコミットメントの識別、監視、および調整 [4, 7]
-MAN.3.BP8: プロジェクトスケジュールの定義、監視、および調整 [3, 5, 7]
-MAN.3.BP10: プロジェクト進捗のレビューおよび報告 [6, 7]
+- プロジェクトマネジメント開始 / 検討開始依頼
+- プロジェクト計画書（初期段階のプロジェクト概要計画レベル）
 
-- Closing phase
+#### _[@F] ACTIVITY FLOW_
+
+| ![[@fig:puml PUML.PJM::Initiate]](ProjectManagement/Initiate.png) |
+| :-: |
+| fig.4.1.1 Initiate activity flow
+
+#### _[@T] TASKS_
+
+| @id | Name | Description |
+| :-: | ---- | ----------- |
+| T1  | プロジェクト情報の収集 | 関係者から情報を収集し、記録する。
+| T2  | プロジェクト憲章の策定 |
+| T3  | プロジェクトマネジメント戦略の策定 |
+
+#### _[@D] DELIVERABLES_
+
+| @id | Name | Description |
+| :-: | ---- | ----------- |
+| D1  | Project Charter | プロジェクト憲章
+| D2  | Project Management Strategy | プロジェクトマネジメント戦略
+
+#### _[@V] VERIFICATION_
+
+| @id | Name | Description |
+| :-: | ---- | ----------- |
+| V1  | プロジェクト計画書（プロジェクトマネジメントパート） |
+
+#### _[@X] EXIT CRITERIA / OUTPUT_
+
+| @id | Name | Description |
+| :-: | ---- | ----------- |
+| X1  | プロジェクトマネジメント計画の充分性 | プロジェクトの見積り、プロジェクトの実現性検討、プロジェクト開始判断を行えるレベルであること。
+
+### 4.2. [@activity] Initiation
+
+#### _[@P] PURPOSE_
+
+- プロジェクトライフサイクル全体を定義するために情報収集し、プロジェクト初期計画および初期見積りを行い、プロジェクト計画書を作成する。
+
+#### _[@E] ENTRY CRITERIA / INPUT_
+
+1. プロジェクト開始依頼
+2. 初期段階のプロジェクト概要計画書（客先への見積提案書レベル）
+
+#### _[@F] ACTIVITY FLOW_
+
+| ![[@fig.puml PUML.PJIM::Initiate]](ProjectIntegrationManagement/Initiate.png) |
+| :-: |
+| fig 4.2.1 Initiate activity flow
+
+#### _[@T] TASKS_
+
+| @id | Name | Description |
+| :-: | ---- | ----------- |
+| T1  | Create a blank _ProjectPlan_ | テンプレートを複製してプロジェクト計画書を作成する。初期段階のプロジェクト概要計画書(E2)の内容を転記する。
+| T2  | PJM::Initiate() | < ProjectPlan = PJM::Initiate(ProjectPlan) ><br>プロジェクトマネジメント観点から情報収集し、プロジェクト定義・マネジメント戦略の策定を行う。
+| T3  | SWE::Initiate() | < ProjectPlan = SWE::Initiate(ProjectPlan) ><br>ソフトウェア開発観点から情報収集し、開発方針・技術戦略の策定を行う。
+| T4  | SQA::Initiate() | < ProjectPlan = SQA::Initiate(ProjectPlan) ><br>ソフトウェア品質保証観点から情報収集し、品質保証戦略の策定を行う。
+|     | @note | T1, T2, T3 の各タスクは相互に強く影響を及ぼすため連携して進めること。
+| T5  | Adjust _ProjectPlan_ to integrate | PJM, SWE, SQA それぞれが整合するよう計画の調整を行い、プロジェクト計画書を更新する。
+| B1  | | 計画が整合しない場合は、対応方針を示して再度 T1, T2, T3 を実施する。
+| T6  | PJM::Estimate(ProjectPlan) | < ProjectEstimationRecord = PJM::Estimate(ProjectPlan) ><br>プロジェクトの見積を行う。
+| T7  | WPM::Initiate() | < WPM::Estimate(ProjectPlan) ><br>Work product Management を開始する。
+| T8  | ISM::Initiate() | < ISM::Estimate(ProjectPlan) ><br>Issue Management プロセスを開始する。
+| T9  | WPM::CreateRepositor() | < WPM::CreateRepository() ><br>プロジェクト計画書などのプロジェクト関連文書用のリポジトリを生成する。プロダクト成果物と同一のリポジトリにしても分離してもよい（D3 参照）。
+| T10  | Create initial baseline of Pfojetc plan and estimation | < WPM::MergeRequest(develop, master) ><br>Create initial baseline of Pfojetc plan and estimation. then, project started. <br>プロジェクト計画書をマスターブランチへ発行して初版とし、プロジェクトを正式スタートする。
+
+#### _[@D] DELIVERABLES_
+
+| @id | Name | Description |
+| :-: | ---- | ----------- |
+| D1  | Project Plan | プロジェクト計画書。プロジェクト固有の計画・管理情報が記載される。初期見積りからプロジェクト終結まで、段階的に詳細化・修正され、維持される。
+| D2  | Project Estimation Record | プロジェクト見積り記録。プロジェクト計画書とともに、プロジェクト終結まで修正・維持される。
+| D3  | Project Repository | プロジェクトマネジメント関連文書のためのリポジトリ。プロダクト成果物と同一のリポジトリにしても分離してもよい（プロジェクト毎に決定し、プロジェクト計画書・WPMパートに記述する）。
+
+#### _[@V] VERIFICATION_
+
+| @id | Name | Description |
+| :-: | ---- | ----------- |
+| V1  | プロジェクト計画書 | プロジェクト計画書チェックシート（プロジェクト計画書テンプレートの一部として提供される）に従い、関連ステークホルダーによるレビューを実施する。
+
+#### _[@X] EXIT CRITERIA / OUTPUT_
+
+| @id | Name | Description |
+| :-: | ---- | ----------- |
+| X1  | プロジェクト計画書の承認 | プロジェクトが定義され、T10 にて関連ステークホルダーから承認を得ていること（計画内容、リソースの割当て、プロジェクト活動の開始について承認を得る）。
+|     | @note X1.1 | 承認を得るべきステークホルダーは本アクティビティを通じて決定され、プロダクト計画書に記載されている。
+| X2  | プロジェクト計画書・初版 | プロジェクト計画書の、ステークホルダーから承認を得た初版。収集されたプロジェクト情報、プロジェクト見積記録とともに、ベースライン化されていること。
+
+---
+
+### 4.3. [@activity] Planning
+
+#### _[@P] PURPOSE_
+
+- 各ステークホルダーからの要求を満たしうるよう、PJM・SWE・SQAの各観点から計画を調整し、整合させる。
+
+#### _[@E] ENTRY CRITERIA / INPUT_
+
+- プロジェクト計画書
+
+#### _[@F] ACTIVITY FLOW_
+
+| ![[@fig:puml PUML.PJIM::Main]](ProjectIntegrationManagement/Planning.png) |
+| :-: |
+| fig 4.3 Planning activity flow
+
+#### _[@T] TASKS_
+
+| @id | Name | Description |
+| :-: | ---- | ----------- |
+| T1  | Initiate PJM | < Call PJM::Initiation ><br> プロジェクトマネジメント観点から情報収集し、プロジェクト定義・マネジメント戦略の策定を行う。
+| T2  | Initiate SWE | < Call SWE::Initiation ><br> ソフトウェア開発観点から情報収集し、開発方針・技術戦略の策定を行う。
+| T3  | Initiate SQA | < Call SQA::Initiation ><br> ソフトウェア品質保証観点から情報収集し、品質保証戦略の策定を行う。
+
+#### _[@D] DELIVERABLES_
+
+| @id | Name | Description |
+| :-: | ---- | ----------- |
+| D1  | Project Plan | プロジェクト計画書。プロセスに定められた共通部分以外のプロジェクト固有情報が記載される。初期見積りからプロジェクト終結まで、段階的に詳細化・修正され、維持される。
+| D2  | Project Estimation Record | プロジェクト見積り記録。プロジェクト計画書とともに、プロジェクト終結まで修正・維持される。
+
+#### _[@V] VERIFICATION_
+
+| @id | Name | Description |
+| :-: | ---- | ----------- |
+| V1  | プロジェクトプランのレビュー | T1（Initiation）の最後に、プロジェクト計画を上位組織のマネジメントによりレビューする。この結果をもって、プロジェクトの開始可否判断が行われる。
+
+#### _[@X] EXIT CRITERIA / OUTPUT_
+
+| @id | Name | Description |
+| :-: | ---- | ----------- |
+| X1  | プロジェクト活動の完了 | 全てのプロジェクト活動が終了している。
+| X2  | プロジェクト完了報告書 | プロジェクト完了報告書が作成され、承認されている。
 
 
+```cpp
 
+ProjectReport main(ProjectPlan projectPlan) {
 
-## Project-specific information
+    /*
+     *    T1. Initiation
+     */
+    projectPlan = PJM::initiate(projectPlan);   // Project management
+    projectPlan = SWE::initiate(projectPlan);   // Software Engineering
+    projectPlan = SQA::initiate(projectPlan);   // Software Quality Authentication
 
-プロジェクトマネジメントプロセスにて参照する以下の情報は、プロジェクト計画書（[ProjectPlan.md](../ProjectPlan.md) ）にて定義する。
+    projectPlan = Estimate(projectPlan);
 
-| PMへのコメント |
-| -------------- |
-| 本パートを ProjectPlan.md にコピーし、内容を記載するとよい。
+    if (waitStart(projectPlan)) {
+        exit();
+    }
 
-// Project management process の初期化すべきメンバ変数をここへ列記する。
+    WPM::initiate(projectPlan);                 // Work product management
+    ISM::initiate(projectPlan);                 // Issue management
 
+    ProjectReport escalatedReport = NULL;
 
+    do {
 
-### 3.2. Project Management Methodology
+        /*
+         *    T5. Adjusting or Controlling
+         */
+        projectPlan = controll(escalatedReport, projectPlan);
 
-#### 3.2.1. Ticket driven development
+        /*
+         *    T2. Planning
+         */
+        projectPlan = PJM::plan(projectPlan);
+        projectPlan = SWE::plan(projectPlan);
+        projectPlan = SQA::plan(projectPlan);
 
-- チケット駆動で開発を行う
+        /*
+         *    T3. Execution
+         *    - execute through Project management
+         */
+        PJM::exec(projectPlan);
 
-- チケットはそれぞれ固有のIssueをもち、Activityの記録を残すエビデンスとして機能する
+        /*
+         *    T4. Monitoring
+         *    - waiting or poling(regularly) status repot
+         */
+        escalatedReport = monitor(projectPlan);
 
-- チケットには３つのレイヤがある
-  1. Epic
-  2. Story
-  3. Task
+    } while (escalatedReport);
 
-#### 3.2.2. Two Layered Scheduling
+    /*
+     *    T6. Closing
+     */
+    escalatedReport = SWE::close(NULL, projectPlan);
+    escalatedReport = PJM::close(escalatedReport, projectPlan);
+    escalatedReport = SQA::close(escalatedReport, projectPlan);
 
-- Engineering sample に対して Epic を割付ける → Release plan → PM
-- Itaration 毎に、実施する Story を決定する → Iteration plan → Team
+    ISM::close();
+    WPM::close();
 
-#### 3.2.3. Release planning
+    return escalatedReport;
+}
 
-- 外部チームとの定期ミーティングにて進捗共有し、調整する
-- Engineering sample と Product release とがある
-- 現在の最新のリリースプランは [こちら] ← 版歴管理可能ななにか。最初は md のテーブルでよいのでは。
-
-#### 3.2.4. Iteration planning
-
-- Plugin にて、PMBOK・ガントチャートスタイル、Scrumスタイルなどを実施。
-- 定例ミーティングの開催、retrospective など。
-
-### 3.3. Issue Management Process
-
-- Issue type毎に必要な手順、記録を定めたもののセット。
-- Ticket 発行時にタイプを指定することで、実施者は従うべきプロセスを参照できる。
-
-#### 3.3.1. Resources
-
-| Server | Address |
-| ------ | ------- |
-| Jira                     | http://192.168.200.300 |
-| Issue management process | http://192.168.200.400 |
-
-#### 3.3.2. Basic Issue types
-
-| Issue type | Description |
-| ---------- | ----------- |
-| Requirement |
-| Incident    |
-| Defect      |
-| Risk        |
-
-#### 3.3.3. Additional Issue types
-
-- plugin で追加する
-
-| Issue type | Description |
-| ---------- | ----------- |
-| Joint review |
-| Rlease       | Epic
-
-
+```

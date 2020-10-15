@@ -1,0 +1,86 @@
+' # [@ GHOST.PJIM] Project Integration Management Process
+'
+' ### 4.2. [@activity] Initiate
+'
+@startuml Initiate
+
+!include style.iuml
+
+' Roles
+| Project Manager |
+| Deliverables |
+
+' Activities
+| Project Manager |
+start
+
+:T1. プロジェクト情報の収集;
+
+:T2. プロジェクト憲章の策定;
+| Deliverables |
+    note right
+    D1. Project Charter
+    ----
+    * A part of //ProjectPlan//
+    end note
+| Project Manager |
+
+:T3. プロジェクトマネジメント\n        戦略の策定;
+| Deliverables |
+    note right
+    D2. Project management strategy
+    ----
+    * A part of //ProjectPlan//
+    end note
+| Project Manager |
+
+stop
+
+@enduml
+
+'
+' ### 4.3. [@activity] Planning
+'
+@startuml Planning
+
+skinparam monochrome    true
+skinparam shadowing     false
+skinparam PartitionBorderThickness 1
+skinparam ActivityBarColor dimgrey
+
+' Roles
+| Project Manager |
+| Deliverables |
+
+' Activities
+| Project Manager |
+start
+
+repeat
+
+fork
+    :T1. Plan PJM;
+fork again
+    :T2. Plan SWE;
+fork again
+    :T3. Plan SQA;
+endfork
+
+:T4. Adjust to integrate;
+| Deliverables |
+    note right
+    D2. Integrated Project Plan
+    ----
+    * Calling the method ""foo( )"" is prohibited
+    end note
+| Project Manager |
+
+repeat while (B1. OK?) is (No)
+
+:T5. Estimate the project;
+
+stop
+
+
+@enduml
+
