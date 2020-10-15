@@ -39,6 +39,8 @@
 
 ### 3.1. [@workproduct] Project Plan
 
+- [ ] クラス図を追加する
+
 | @id | Name | Description |
 | --- | ---- | ----------- |
 | PP            | ProjectPlan | プロジェクト計画書。Ghostプロセスを使用したプロジェクトの、ルート文書となる。以下のコンテンツを含む。
@@ -76,7 +78,7 @@
 
 #### _[@F] ACTIVITY FLOW_
 
-| ![[@fig:puml PUML.PJIM::Main]](../puml/process/ProjectIntegrationManagement/Main.png) |
+| ![[@fig:puml PUML.PJIM::Main]](ProjectIntegrationManagement/Main.png) |
 | :-: |
 | fig.4.1 Main activity flow
 
@@ -84,7 +86,7 @@
 
 | @id | Name | Description |
 | :-: | ---- | ----------- |
-| T1  | Initiation  | < Call this.Initiation ><br> プロジェクトの骨格（ゴール、スコープ、スケジュール、コストを含む）を定義し、エンジニアリング方針（アーキテクチャ、主要技術、評価手法など）および品質保証戦略を定義する。これに基づきプロジェクト初期見積りと実現可能性検証を行う。見積られたプロジェクトに適した成果物管理プロセス、課題管理プロセスを選定し、初期化する。
+| T1  | Initiation  | < Call this.Initiation ><br>プロジェクトを開始するために、プロジェクト情報を収集し、プロジェクトを定義し、プロジェクト開始の承認を得る。
 |     | @note       | 推奨： T1 と T2 の間でキックオフを実施するとよい。
 | T2  | Planning    | < Call this.Planning ><br> プロジェクトのプランニングを行う。プロジェクトマネジメントプラン、エンジニアリングプランを具体化し、これにあわせて品質保証プランを策定する。
 | T3  | Execution   | < Call this.Execution ><br> プロジェクトマネジメントの実行プロセスを通じて、プロジェクトの各プランを実行に移す。
@@ -116,65 +118,63 @@
 | X1  | プロジェクト活動の完了 | 全てのプロジェクト活動が終了している。
 | X2  | プロジェクト完了報告書 | プロジェクト完了報告書が作成され、承認されている。
 
----
-
 ### 4.2. [@activity] Initiation
 
 #### _[@P] PURPOSE_
 
-- プロジェクトライフサイクル全体を定義するために、情報収集しプロジェクト初期計画および初期見積りを行う。
+- プロジェクトを開始するために、プロジェクト情報を収集し、プロジェクトを定義し、プロジェクト開始の承認を得る。
 
 #### _[@E] ENTRY CRITERIA / INPUT_
 
-- 上位組織からのプロジェクト開始依頼
-- 初期段階のプロジェクト概要計画書（見積提案書レベル）
-  - ゴール概要、スコープ概要、納期及び計画概要を含む。
+1. プロジェクト開始依頼 / 開始検討依頼
+2. 初期段階のプロジェクト概要計画書（客先への見積提案書レベル）
 
 #### _[@F] ACTIVITY FLOW_
 
-| ![[@fig:puml PUML.PJIM::Main]](../puml/process/ProjectIntegrationManagement/Initiate.png) |
+| ![[@fig.puml PUML.PJIM::Initiate]](ProjectIntegrationManagement/Initiate.png) |
 | :-: |
-| fig 4.2 Initiate activity flow
+| fig 4.2.1 Initiate activity flow
 
 #### _[@T] TASKS_
 
 | @id | Name | Description |
 | :-: | ---- | ----------- |
-| T1  | Initiate PJM | < Call PJM::Initiation ><br> プロジェクトマネジメント観点から情報収集し、プロジェクト定義・マネジメント戦略の策定を行う。
-| T2  | Initiate SWE | < Call SWE::Initiation ><br> ソフトウェア開発観点から情報収集し、開発方針・技術戦略の策定を行う。
-| T3  | Initiate SQA | < Call SQA::Initiation ><br> ソフトウェア品質保証観点から情報収集し、品質保証戦略の策定を行う。
+| T1  | Create a blank _ProjectPlan_ | テンプレートを複製してプロジェクト計画書を作成する。初期段階のプロジェクト概要計画書(E2)の内容を転記する。
+| T2  | PJM::Initiate() | < ProjectPlan = PJM::Initiate(ProjectPlan) ><br>プロジェクトマネジメント観点から情報収集し、プロジェクト憲章・マネジメント戦略の策定を行う。
+| T3  | SWE::Initiate() | < ProjectPlan = SWE::Initiate(ProjectPlan) ><br>ソフトウェア開発観点から情報収集し、開発方針・技術戦略の策定を行う。
+| T4  | SQA::Initiate() | < ProjectPlan = SQA::Initiate(ProjectPlan) ><br>ソフトウェア品質保証観点から情報収集し、品質保証戦略の策定を行う。
 |     | @note | T1, T2, T3 の各タスクは相互に強く影響を及ぼすため連携して進めること。
-| T4  | Adjust to integrate | PJM, SWE, SQA それぞれが整合するよう計画の調整を行い、プロジェクト計画書を作成する
+| T5  | Adjust _ProjectPlan_ to integrate | PJM, SWE, SQA それぞれの戦略・計画が整合するよう計画の調整を行い、プロジェクト計画書を更新する。
 | B1  | | 計画が整合しない場合は、対応方針を示して再度 T1, T2, T3 を実施する。
-| T5  | Estimate the project | < Call PJM::Estimate ><br> プロジェクトの見積を行う。
-| T6  | Initiate WPM | < Call WPM::Estimate ><br> Work product Management を開始する。
-| T7  | Initiate ISM | < Call ISM::Estimate ><br> Issue Management プロセスを開始する。
-| T8  | Create initial baseline of Pfojetc plan and estimation | < Call WPM::MergeRequest(develop, master) ><br> Create initial baseline of Pfojetc plan and estimation. then, project started. プロジェクト計画書をマスターブランチへ発行して初版とし、プロジェクトを正式スタートする。
+| T6  | PJM::Estimate(ProjectPlan) | < ProjectEstimationRecord = PJM::Estimate(ProjectPlan) ><br>プロジェクトの見積を行う。
+| B2  | PJM::GetApproval(ProjectPlan, ProjectEstimationRecord) | < Approval = PJM::GetApproval(ProjectPlan, ProjectEstimationRecord) ><br>プロジェクト計画に定める承認プロセスに従い、プロジェクト開始の承認を得る。
+| T7  | WPM::Initiate() | < WPM::Estimate(ProjectPlan) ><br>Work product Management を開始する。
+| T8  | ISM::Initiate() | < ISM::Estimate(ProjectPlan) ><br>Issue Management プロセスを開始する。
+| T9  | WPM::CreateRepositor() | < WPM::CreateRepository() ><br>プロジェクト計画書などのプロジェクト関連文書用のリポジトリを生成する。プロダクト成果物と同一のリポジトリにしても分離してもよい（D3 参照）。
+| T10 | Create initial baseline of Pfojetc plan and estimation | < WPM::MergeRequest(develop, master) ><br>Create initial baseline of Pfojetc plan and estimation. then, project started. <br>プロジェクト計画書をマスターブランチへ発行して初版とし、プロジェクトを正式スタートする。
+|     | @note | @todo プロジェクトキックオフの実施に言及する。
 
 #### _[@D] DELIVERABLES_
 
 | @id | Name | Description |
 | :-: | ---- | ----------- |
-| D1  | Project Plan | プロジェクト計画書。プロセスに定められた共通部分以外のプロジェクト固有情報が記載される。初期見積りからプロジェクト終結まで、段階的に詳細化・修正され、維持される。
+| D1  | Project Plan | プロジェクト計画書。プロジェクト固有の計画・管理情報が記載される。初期見積りからプロジェクト終結まで、段階的に詳細化・修正され、維持される。
 | D2  | Project Estimation Record | プロジェクト見積り記録。プロジェクト計画書とともに、プロジェクト終結まで修正・維持される。
+| D3  | Project Repository | プロジェクトマネジメント関連文書のためのリポジトリ。プロダクト成果物と同一のリポジトリにしても分離してもよい（プロジェクト毎に決定し、プロジェクト計画書・WPMパートに記述する）。
 
 #### _[@V] VERIFICATION_
 
 | @id | Name | Description |
 | :-: | ---- | ----------- |
-| V1  | プロジェクトプランのレビュー | T1（Initiation）の最後に、プロジェクト計画を上位組織のマネジメントによりレビューする。この結果をもって、プロジェクトの開始可否判断が行われる。
+| V1  | プロジェクト計画書 | プロジェクト計画書チェックシート（プロジェクト計画書テンプレートの一部として提供される）に従い、関連ステークホルダーによるレビューを実施する。
 
 #### _[@X] EXIT CRITERIA / OUTPUT_
 
 | @id | Name | Description |
 | :-: | ---- | ----------- |
-| X1  | プロジェクト活動の完了 | 全てのプロジェクト活動が終了している。
-| X2  | プロジェクト完了報告書 | プロジェクト完了報告書が作成され、承認されている。
-
-acceptance review
-
-
-
+| X1  | プロジェクト計画の承認 | B2 にてプロジェクト計画が承認され、リソースの割当が開始されていること。
+|     | @note X1.1 | 承認を得るべきステークホルダーは本アクティビティを通じて決定され、プロジェクト計画書に記載されている。
+| X2  | プロジェクト計画書・初版 | T10 にて、プロジェクト計画書が関連するステークホルダーから承認されていること。収集されたプロジェクト情報、プロジェクト見積記録とともに、ベースライン化されていること。
 
 ---
 
@@ -190,7 +190,7 @@ acceptance review
 
 #### _[@F] ACTIVITY FLOW_
 
-| ![[@fig:puml PUML.PJIM::Main]](../puml/process/ProjectIntegrationManagement/Planning.png) |
+| ![[@fig:puml PUML.PJIM::Main]](ProjectIntegrationManagement/Planning.png) |
 | :-: |
 | fig 4.3 Planning activity flow
 

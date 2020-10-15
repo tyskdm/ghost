@@ -70,10 +70,7 @@ stop
 '
 @startuml Initiate
 
-skinparam monochrome    true
-skinparam shadowing     false
-skinparam PartitionBorderThickness 1
-skinparam ActivityBarColor dimgrey
+!include style.iuml
 
 ' Roles
 | Project Manager |
@@ -83,39 +80,64 @@ skinparam ActivityBarColor dimgrey
 | Project Manager |
 start
 
-repeat
-
-fork
-    :T1. Initiate PJM;
-fork again
-    :T2. Initiate SWE;
-fork again
-    :T3. Initiate SQA;
-endfork
-
-:T4. Adjust to integrate;
+:T1. Create a blank //ProjectPlan//;
 | Deliverables |
     note right
-    D2. Integrated Project Plan
+    D1. Project Plan (C)
     ----
-    * Calling the method ""foo( )"" is prohibited
+    * Blank plan created from template. 
     end note
 | Project Manager |
 
-repeat while (B1. OK?) is (No)
+repeat
+repeat
 
-:T5. Estimate the project;
+fork
+    :T2. PJM::Initiate();
+fork again
+    :T3. SWE::Initiate();
+fork again
+    :T4. SQA::Initiate();
+endfork
 
-partition "Infra" {
-    :T6. Initiate WPM;
-    :T7. Initiate ISM;
+:T5. Adjust //ProjectPlan// to integrate;
+
+repeat while ( B1. OK? ) is (No)
+
+:T6. PJM::Estimate(ProjectPlan);
+| Deliverables |
+    note right
+    D2. Project Estimation Record
+    ----
+    * Initial estimation
+    end note
+| Project Manager |
+
+repeat while ( B2. PJM::GetApproval (\n        ProjectPlan,\n        ProjectEstimationRecord ) ) is (No)
+
+partition "Infrastructure" {
+    :T7. WPM::Initiate();
+    :T8. ISM::Initiate();
 }
 
-:T8. Criate initial baseline of
-Project plan and estimation;
+:T9. WPM::CreateRepository();
+| Deliverables |
+    note right
+    D3. Project Repository
+    end note
+| Project Manager |
+
+:T10. Create the initial baseline
+    of //ProjectPlan//;
+| Deliverables |
+    note right
+    D1. Project Plan (U)
+    ----
+    * Initial version of //ProjectPlan//
+    end note
+| Project Manager |
 
 stop
-
 
 @enduml
 
