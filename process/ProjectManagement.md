@@ -31,16 +31,18 @@
 
 | @id | Name | Description |
 | :-: | ---- | ----------- |
-| T1  | プロジェクト情報の収集 | 関係者から情報を収集し、記録する。
-| T2  | プロジェクト憲章の策定 |
-| T3  | プロジェクトマネジメント戦略の策定 |
+| T1  | プロジェクト情報の収集 | 関係者から情報を収集し、記録する。<br>< WPM::Record(Evidence) >
+| T2  | プロジェクト憲章の策定 | _ProjectPlan_ "Part I. Project charter" を記述する。
+|     | @note | プロジェクト憲章は、顧客との契約・コミットメントとなる。
+| T3  | プロジェクトマネジメント概要計画の策定 | _ProjectPlan_ "Part II. Outline plan"（Project management part） を記述する。
+|     | @note | 概要計画は、プロジェクト見積のベースとなる。
 
 #### _[@D] DELIVERABLES_
 
 | @id | Name | Description |
 | :-: | ---- | ----------- |
 | D1  | Project Charter | プロジェクト憲章
-| D2  | Project Management Strategy | プロジェクトマネジメント戦略
+| D2  | Project Management Outline plan | プロジェクトマネジメント概要計画
 
 #### _[@V] VERIFICATION_
 

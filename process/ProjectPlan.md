@@ -2,21 +2,65 @@
 
 [@doc ghost 0.4, @docid PJIM.W.PP, @template ghost/process/templates/ProjectPlan]
 
-| # | 大項目 | 中項目 | 説明 |
-| - | ------ | ------ | ---- |
-| 1 | プロジェクト憲章 |
-| 2 | SWEプラン |
-| 2.1 | 
+## Contents
+
+### Part I. Project charter
+
+- [1. [@ PC] Project Charter](#1--pc-project-charter)
+  - [1.2. Purpose](#12-motivation)
+  - [1.1. Goals](#11-goals)
+  - [1.3. Scope and Lifecycle](#13-scope-and-lifecycle)
+  - [1.4. Milestone schedule](#14-milestone-schedule)
+  - [1.5. Assumptions and Constraints](#15-assumptions-and-constraints)
+  - [1.6. Resources and Costs](#16-resources-and-costs)
+  - [1.7. Risks](#17-risks)
+
+### Part II. Outline plan
+
+- [2. [@ SWE] Software Engineering](#2--swe-software-engineering-plan)
+  - 2.1. Key issues and Strategies
+  - [2.2. Design and Imprementation](#21-開発方針)
+  - [2.3. Verification and Validation](#22-verification-strategy)
+- [3. [@ SQA] Quality Assurance](#3--sqa-quality-assurance-plan)
+  - [3.1. Key issues and Strategies](#31-solution)
+  - [3.2. Product Quality](#32--wpq-workproduct-quality)
+  - [3.3. Process Quality](#33--pq-process-quality)
+- [4. [@ PM] Project Management](#4--pm-project-management-plan)
+  - [4.1. Key issues and Strategies](#41-project-lifecycle)
+  - [4.2. Team Formation](#42-project-activities)
+  - [4.3. Team Management](#43-resources)
+  - 4.4. Process Deployment
+
+### Part III. Detailed plan
+
+### Part IV. Process tailoring and configuration
+
+- [5. [@ ISM] Issue Management Plan](#5--ism-issue-management-plan)
+  - [5.1. Problem Resolution Management](#51-problem-resolution-management)
+  - [5.2. Risk Management](#52-risk-management)
+  - [5.3. Change Request Management](#53-change-request-management)
+- [6. [@ WPM] Work product Management Plan](#6--wpm-work-product-management-plan)
+  - [6.1. Ghost documentation](#61-ghost-documentation)
+  - [6.2. Identifier Namespace](#62-identifier-namespace)
+
+### Part V. Appendix
+
+- [7. Links and Terminology](#7-links-and-terminology)
+  - [7.1. Links to referrences](#71-links-to-referrences)
+  - [7.2. Terminology](#72-terminology)
+
+---
 
 ## 1. [@ PC] Project Charter
 
-| @USDM   | Name | Description |
-| ------- | ---- | ----------- |
-| BP1     | 作業範囲の定義 | プロジェクトの目標、モチベーション、および境界を識別する。<br>Define the scope of work. Identify the project's goals, motivation and boundaries.
-| BP2     | プロジェクトのライフサイクルの定義 | プロジェクトの範囲、背景、規模、および複雑性に適したプロジェクトのライフサイクルを定義する。
-|         | @note 1      | 一般的にこのプラクティスは、プロジェクトライフサイクルおよび顧客の開発プロセスが互いに一貫していることを意図する。
+### 1.2. Prpose
 
-### 1.1. Goals
+- 自動運転自動車の市場進化・拡大に向け、より多く多様なソフトウェア開発企業の市場参入が求められている。
+- その際、自動車メーカーによる機能安全規格対応・SOTIF対応など、安全性確保のためのプロセス構築が課題となる。
+- 一般に先進的なソフトウェア技術開発を行う企業は大企業ではなく、自動車業界レベルの品質保証プロセスを保有していない。
+- 本プロジェクトは、新規参入を目指す（大規模なSPEGをもたない）企業が自社向けソフトウェア開発プロセスを構築するための環境を提供する。
+
+### 1.2. Goals
 
 #### _Description_
 
@@ -27,13 +71,6 @@
 
 - Automotive SPICE に対応可能で、Github やアジャイル開発指向な組込みソフトウェア開発プロセスを提供する。
 - コア部分とアプリケーション部分を分離し、利用者の自社向けプロセス構築が容易になるようコア資産を充実させる。
-
-### 1.2. Motivation
-
-- 自動運転自動車の市場進化・拡大に向け、より多く多様なソフトウェア開発企業の市場参入が求められている。
-- その際、自動車メーカーによる機能安全規格対応・SOTIF対応など、安全性確保のためのプロセス構築が課題となる。
-- 一般に先進的なソフトウェア技術開発を行う企業は大企業ではなく、自動車業界レベルの品質保証プロセスを保有していない。
-- 本プロジェクトは、新規参入を目指す（大規模なSPEGをもたない）企業が自社向けソフトウェア開発プロセスを構築するための環境を提供する。
 
 ### 1.3. Scope and Lifecycle
 
