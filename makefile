@@ -1,10 +1,12 @@
-.PHONY: clean puml_clean puml_img
+.PHONY: all clean puml_clean puml_img
 
 # 1. Plant UML Settings
 ## directories
 PUMLSRC     := .
 ## flags
 PUMLFLAGS   :=
+
+all: clean puml_img
 
 puml_img:
 	@find $(PUMLSRC) \( -name *.puml -or -name *.pu \) | while read line; \
