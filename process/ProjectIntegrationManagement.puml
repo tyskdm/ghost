@@ -1,62 +1,73 @@
-' # [@ GHOST.PJIM] Project Integration Management Process
+' # [@ GHOST.PIM] Project Integration Management Process
 '
 ' ### 4.1. [@activity] Main
 '
 @startuml Main
 
-skinparam monochrome    true
-skinparam shadowing     false
-skinparam PartitionBorderThickness 1
-skinparam ActivityBarColor dimgrey
+!include style.iuml
 
 ' Roles
 | Project Manager |
-| Deliverables |
+| Work products |
 
 ' Activities
 | Project Manager |
 
 start
 
-:T1. Initiation( );
+:T1. Initiate( );
+| Work products |
+    note right
+    D1. Project Master Plan
+    Q1. Project Estimation Record
+    ----
+    - Initial version
+    end note
+| Project Manager |
 
 repeat
-    :T2. Planning( );
+    :T2. Plan( );
 
-    | Deliverables |
+    | Work products |
         note right
-        Project Plan
+        D2. Project Master Plan
+        Q2. Project Estimation Record
         ----
-        * Calling the method ""foo( )"" is prohibited
+        - Updated version
         end note
     | Project Manager |
 
-    repeat  :T3. Execution( );
-        :T4. Monitoring( );
+    repeat  :T3. Execute( );
+        :T4. Monitor( );
+    | Work products |
+        note right
+        Q3. Project Status Report
+        ----
+        - Created at T4 and T5
+        end note
+    | Project Manager |
 
-        if (B1. all Done?) then (Yes)
+        if (\n V1. Goals are achieved? \n) then (Yes)
             (e)
         else (No)
         endif
 
-    repeat while (B2. Deviation?) is (No)
+    repeat while (\n V2. Deviation? \n) is (No)
 
-backward :T5. Controlling( );
+backward :T5. Control( );
 
-repeat while ( ) is (Some deviation from the plan)
+repeat while ( ) is (deviation from the plan)
 detach
 
-:A1. onExit<
+:T6. onExit<
 
 (e)
 
-:T6. Closing( );
+:T7. Close( );
 
-| Deliverables |
+| Work products |
     note right
-    Project Plan
-    ----
-    * Calling the method ""foo( )"" is prohibited
+    D3. Project Closure Report
     end note
 | Project Manager |
 
@@ -66,7 +77,7 @@ stop
 
 
 '
-' ### 4.2. [@activity] Initiation
+' ### 4.2. [@activity] Initiate
 '
 @startuml Initiate
 
@@ -74,18 +85,18 @@ stop
 
 ' Roles
 | Project Manager |
-| Deliverables |
+| Work products |
 
 ' Activities
 | Project Manager |
 start
 
-:T1. Create a blank //ProjectPlan//;
-| Deliverables |
+:T1. Create new //ProjectMasterPlan//;
+| Work products |
     note right
-    D1. Project Plan (C)
+    D1. Project Master Plan
     ----
-    * Blank plan created from template. 
+    * Created from template. 
     end note
 | Project Manager |
 
@@ -93,27 +104,27 @@ repeat
 repeat
 
 fork
-    :T2. PJM::Initiate();
+    :T2. PM::Initiate();
 fork again
     :T3. SWE::Initiate();
 fork again
     :T4. SQA::Initiate();
 endfork
 
-:T5. Adjust //ProjectPlan// to integrate;
+:T5. Integrate //ProjectMasterPlan//;
 
-repeat while ( B1. OK? ) is (No)
+repeat while (\n V1. Evaluate feasibility of the //ProjectMasterPlan// \n) is (Not OK) not (OK)
 
-:T6. PJM::Estimate(ProjectPlan);
-| Deliverables |
+:T6. PM::Estimate(//ProjectMasterPlan//);
+| Work products |
     note right
-    D2. Project Estimation Record
+    Q1. Project Estimation Record
     ----
     * Initial estimation
     end note
 | Project Manager |
 
-repeat while ( B2. PJM::GetApproval (\n        ProjectPlan,\n        ProjectEstimationRecord ) ) is (No)
+repeat while (\n V2. PM::GetApproval (\n       ProjectMasterPlan,\n       ProjectEstimationRecord ) \n) is (Rejected) not (Approved)
 
 partition "Infrastructure" {
     :T7. WPM::Initiate();
@@ -121,19 +132,19 @@ partition "Infrastructure" {
 }
 
 :T9. WPM::CreateRepository();
-| Deliverables |
+| Work products |
     note right
-    D3. Project Repository
+    D2. Project Repository
     end note
 | Project Manager |
 
 :T10. Create the initial baseline
-    of //ProjectPlan//;
-| Deliverables |
+    of //ProjectMasterPlan//;
+| Work products |
     note right
-    D1. Project Plan (U)
+    D3. Project Master Plan
     ----
-    * Initial version of //ProjectPlan//
+    * Initial version of //ProjectMasterPlan//
     end note
 | Project Manager |
 
@@ -142,18 +153,15 @@ stop
 @enduml
 
 '
-' ### 4.3. [@activity] Planning
+' ### 4.3. [@activity] Plan
 '
-@startuml Planning
+@startuml Plan
 
-skinparam monochrome    true
-skinparam shadowing     false
-skinparam PartitionBorderThickness 1
-skinparam ActivityBarColor dimgrey
+!include style.iuml
 
 ' Roles
 | Project Manager |
-| Deliverables |
+| Work products |
 
 ' Activities
 | Project Manager |
@@ -162,7 +170,7 @@ start
 repeat
 
 fork
-    :T1. Plan PJM;
+    :T1. Plan PM:
 fork again
     :T2. Plan SWE;
 fork again
@@ -170,9 +178,9 @@ fork again
 endfork
 
 :T4. Adjust to integrate;
-| Deliverables |
+| Work products |
     note right
-    D2. Integrated Project Plan
+    D2. Integrated Project Master Plan
     ----
     * Calling the method ""foo( )"" is prohibited
     end note
