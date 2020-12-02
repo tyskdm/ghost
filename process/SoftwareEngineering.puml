@@ -1,0 +1,73 @@
+' # [@ GHOST.SWE] Software Engineering Process
+'
+' ### 4.1. [@activity] Initiate
+'
+@startuml Initiate
+
+!include style.iuml
+
+' Roles
+| Software Engineer |
+| Deliverables |
+
+' Activities
+| Software Engineer |
+start
+
+repeat;
+
+    :T1. プロジェクトの条件と課題の把握;
+    | Deliverables |
+        note right
+        Q1. Project Conditions
+        end note
+    | Software Engineer |
+
+    :T2. \tソフトウェアエンジニアリング戦略\n\tの策定;
+    | Deliverables |
+        note right
+        D1. Software engineering Outline plan
+        ----
+        Create the new document here,
+        and Update it at the following task steps.
+        end note
+    | Software Engineer |
+
+    :T3. ワークパッケージの定義;
+
+    :T4. 概要スケジュールの作成;
+
+    :T5. 必要リソースの抽出;
+
+    :T6.\tソフトウェアエンジニアリングプロセスの\n\t選定とテーラーリング;
+    | Deliverables |
+        note right
+        Q2. Process Select Table
+        end note
+    | Software Engineer |
+
+repeat while (\n V1.\tソフトウェアエンジニアリング概要\n\t計画書のレビュー\n) is (NotOK)
+
+stop
+
+@enduml
+
+'
+' ### 4.2. [@activity] Plan
+'
+@startuml Plan
+
+!include style.iuml
+
+' Roles
+| Project Manager |
+| Deliverables |
+
+' Activities
+| Project Manager |
+start
+
+stop
+
+@enduml
+

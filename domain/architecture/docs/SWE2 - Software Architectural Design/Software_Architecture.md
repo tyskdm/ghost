@@ -26,7 +26,7 @@ Ghost process のアーキテクチャ設計。
 
 1. アプリ層
 2. ミドルウェア層
-3. インフラ抽象化層（Infrastructure Abstraction Layer）
+3. ツール抽象化層（Tool Abstraction Layer）
 
 ### 2team 共通インフラ
 
@@ -39,6 +39,14 @@ Ghost process のアーキテクチャ設計。
 
 3階層７コンポーネントになる。
 
+ブロック定義を行う。ブロック定義図はEAにて。
+
+| @Block Id | Name | Description |
+| --------- | ---- | ----------- |
+| PM-gh000  | Project Management Process   |
+| SE-gh000  | Software Engineering Process |
+| QA-gh000  | Quality Assurance Process    |
+
 ### 2.1. アプリ層
 
 SWE team 内部を、さらに Eng と PM とに分割する。
@@ -46,7 +54,28 @@ SWE team 内部を、さらに Eng と PM とに分割する。
 - PM と Eng は、チケットを主要な媒介としてインターフェースする
 - チケットは、課題と対応アクティビティの実施を管理する
 
-#### 2.1.1. PM
+#### 2.1.1. [@ PM.REQ] Project Management Process
+
+| @Section | SWAD.PM.REQ |
+| -------- | ----------- |
+| Type        | Requirement
+| SatisfiedBy | SWAD.PM-gh000 Project Managemnet Process
+| Description | Requirements for Project Management Process
+
+
+| @Reqt Id | Name | Description |
+| -------- | ---- | ----------- |
+| 1-gh000   | func requirement | some reqt
+| | @trace  | @copy ASPICE.31.MAN3.BP3
+| 2-gh000   | nonf requirement | other reqt
+| | @trace  | @rifine SYRQ.FR.CR.3-gh000
+
+| @Reqt Id | Name | Description |
+| -------- | ---- | ----------- |
+| 3-gh000   | func requirement | some reqt
+| | @trace  | @copy ASPICE.31.MAN3.BP3
+| 4-gh000   | nonf requirement | other reqt
+| | @trace  | @rifine SYRQ.FR.CR.3-gh000
 
 1. 顧客やステークホルダーからの要求・インシデントをもとに、Issueを整理する。
    - WBSと呼んでも差し支えないが、プロジェクトの進行に連れ、Issueは不具合や変更要求など予め計画できないものを含む。

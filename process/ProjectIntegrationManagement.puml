@@ -39,13 +39,13 @@ repeat
 
     repeat  :T3. Execute( );
         :T4. Monitor( );
-    | Work products |
-        note right
-        Q3. Project Status Report
-        ----
-        - Created at T4 and T5
-        end note
-    | Project Manager |
+        | Work products |
+            note right
+            Q3. Project Status Report
+            ----
+            - Created at T4 and T5
+            end note
+        | Project Manager |
 
         if (\n V1. Goals are achieved? \n) then (Yes)
             (e)
@@ -91,31 +91,39 @@ stop
 | Project Manager |
 start
 
-:T1. Create new //ProjectMasterPlan//;
+:T1. Define the project;
 | Work products |
     note right
     D1. Project Master Plan
     ----
-    * Created from template. 
+    * Includes Poject charter
     end note
 | Project Manager |
 
 repeat
 repeat
 
-fork
-    :T2. PM::Initiate();
-fork again
-    :T3. SWE::Initiate();
-fork again
-    :T4. SQA::Initiate();
-endfork
+partition "Application" {
+    fork
+        :T2. SWE::Initiate();
+    fork again
+        :T3. SQA::Initiate();
+    fork again
+        :T4. PM::Initiate();
+    endfork
+}
 
-:T5. Integrate //ProjectMasterPlan//;
+partition "Middleware" {
+    fork
+        :T5. WPM::Initiate();
+    fork again
+        :T6. ISM::Initiate();
+    endfork
+}
 
 repeat while (\n V1. Evaluate feasibility of the //ProjectMasterPlan// \n) is (Not OK) not (OK)
 
-:T6. PM::Estimate(//ProjectMasterPlan//);
+:T7. PM::Estimate(//ProjectMasterPlan//);
 | Work products |
     note right
     Q1. Project Estimation Record
@@ -124,25 +132,13 @@ repeat while (\n V1. Evaluate feasibility of the //ProjectMasterPlan// \n) is (N
     end note
 | Project Manager |
 
-repeat while (\n V2. PM::GetApproval (\n       ProjectMasterPlan,\n       ProjectEstimationRecord ) \n) is (Rejected) not (Approved)
+repeat while (\n V2. GetApproval (\n\tProjectMasterPlan,\n\tProjectEstimationRecord ) \n) is (Rejected) not (Approved)
 
-partition "Infrastructure" {
-    :T7. WPM::Initiate();
-    :T8. ISM::Initiate();
-}
-
-:T9. WPM::CreateRepository();
-| Work products |
-    note right
-    D2. Project Repository
-    end note
-| Project Manager |
-
-:T10. Create the initial baseline
+:T8. Create the initial baseline
     of //ProjectMasterPlan//;
 | Work products |
     note right
-    D3. Project Master Plan
+    D2. Project Master Plan
     ----
     * Initial version of //ProjectMasterPlan//
     end note
