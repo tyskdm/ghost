@@ -61,24 +61,35 @@
   - [5.8. Resources](#58-resources)
     - [5.8.1. Estimate of resources](#581-estimate-of-resources)
     - [5.8.2. Human resources](#582-human-resources)
+      - [5.8.2.1. Project team](#5821-project-team)
+      - [5.8.2.2. Contractor](#5822-contractor)
     - [5.8.3. Tools](#583-tools)
     - [5.8.4. Infrastructure](#584-infrastructure)
   - [5.9. Project interface](#59-project-interface)
     - [5.9.1. Stakeholders](#591-stakeholders)
     - [5.9.2. Communication plan](#592-communication-plan)
-- [6. Work product Management](#6-work-product-management)
-  - [6.1. Work products](#61-work-products)
-    - [6.1.1. Product-related work products](#611-product-related-work-products)
-    - [6.1.2. Project-related work products](#612-project-related-work-products)
-  - [6.2. Work product Traceability](#62-work-product-traceability)
-  - [6.3. Configuration management](#63-configuration-management)
-    - [6.3.1. Overview](#631-overview)
-    - [6.3.2. `ghost` repository](#632-ghost-repository)
-    - [6.3.3. Status reporting](#633-status-reporting)
-  - [6.4. Record management](#64-record-management)
-    - [6.4.1. Overview](#641-overview)
-    - [6.4.2. Google drive `Ghost` folder](#642-google-drive-ghost-folder)
-    - [6.4.3. Status reporting](#643-status-reporting)
+      - [5.9.2.1. Regular meeting](#5921-regular-meeting)
+      - [5.9.2.2. Ondemand](#5922-ondemand)
+- [6. WORK PRODUCT MANAGEMENT](#6-work-product-management)
+  - [6.1. Repositories and Work products](#61-repositories-and-work-products)
+    - [6.1.1. Repositories](#611-repositories)
+    - [6.1.2. Software Engeneering](#612-software-engeneering)
+    - [6.1.3. Software Quality Assurance](#613-software-quality-assurance)
+    - [6.1.4. Project Management](#614-project-management)
+  - [6.2. Operation rules](#62-operation-rules)
+    - [6.2.1. GitHub `ghost` repository](#621-github-ghost-repository)
+      - [6.2.1.1. Access](#6211-access)
+      - [6.2.1.2. Branching model](#6212-branching-model)
+      - [6.2.1.3. Branching workflow](#6213-branching-workflow)
+      - [6.2.1.4. Publication and Notification](#6214-publication-and-notification)
+      - [6.2.1.5. Status reporting](#6215-status-reporting)
+      - [6.2.1.6. Backup and Restore](#6216-backup-and-restore)
+    - [6.2.2. Google drive `Ghost` folder](#622-google-drive-ghost-folder)
+      - [6.2.2.1. Access](#6221-access)
+      - [6.2.2.2. Workflow](#6222-workflow)
+      - [6.2.2.3. Publication and Notification](#6223-publication-and-notification)
+      - [6.2.2.4. Status reporting](#6224-status-reporting)
+      - [6.2.2.5. Backup and Restore](#6225-backup-and-restore)
 - [7. Issue Management](#7-issue-management)
   - [7.1. Issue types and plugins](#71-issue-types-and-plugins)
   - [7.2. Escaration rule](#72-escaration-rule)
@@ -418,168 +429,139 @@
 
 <br>
 
-## 6. Work product Management
+## 6. WORK PRODUCT MANAGEMENT
 
-### 6.1. Work products
+### 6.1. Repositories and Work products
 
-本プロジェクトにより作成される作業成果物およびその詳細リスト（Work product List）の所在を以下に示す。
-これらの成果物は、特記のない限り以下の２つのリポジトリいずれかで管理される。
+本プロジェクトにより作成される作業成果物種別とそのリポジトリ、および作業成果物リスト（Work product List）の所在を示す。
 
-1. GitHub - ghost repository
-2. Google Drive - Ghost folder
+#### 6.1.1. Repositories
 
-#### 6.1.1. Product-related work products
+| Name | Type | Location | Admin |
+| ---- | ---- | -------- | ----- |
+| GitHub | GitHub | [github.com/tyskdm/ghost](https://github.com/tyskdm/ghost) | tyskdm
+| Gdrive | Google Drive | [Shared Ghost folder](https://drive.google.com/drive/folders/1tKrJnmt2DNWR0v39NFvDqSdUYOpNzi8w) | tyskdm
 
-##### 6.1.1.1. Product deliverables
+#### 6.1.2. Software Engeneering
 
-| Name | Location | Work product list |
-| ---- | -------- | ----------------- |
-| Ghost process documents | GitHub - ghost repository | /project/WorkproductList.md
-| | @note 1 | プロセス文書およびプロセスプラグイン文書から構成される。
-| | @note 2 | 文書はMarkdownおよびPlantUMLで作成する。
-| Ghost process domain documents | GitHub - ghost repository | /project/WorkproductList.md
-| | @note 1 | プロセス設計文書を含む、ドメイン資産となる文書。
+| Name | Repository | Work product list | Description |
+| ---- | ---------- | ----------------- | ----------- |
+| Ghost process documents        | GitHub | /project/WorkproductList.md
+| Ghost process plugin           | GitHub | /project/WorkproductList.md
+| Ghost domain documents         | GitHub | /project/WorkproductList.md
+| Design documents               | GitHub | /project/WorkproductList.md
+| Requirement analysis documents | Gdrive | /WorkproductList | Ghost processへの要件分析を行った、主にGoogle spreadsheetによる資料
 
-##### 6.1.1.2. Requirement analysis documents
-
-| Name | Location | Work product list | Description |
-| ---- | -------- | ----------------- | ----------- |
-| Requirement analysis documents | Google drive - Ghost folder | [Ghost](https://drive.google.com/drive/folders/1tKrJnmt2DNWR0v39NFvDqSdUYOpNzi8w)
-| | @note 1 | Ghost processへの要件分析を行った、主にGoogle spreadsheetによる資料
-
-##### 6.1.1.3. Quality records
+#### 6.1.3. Software Quality Assurance
 
 | Name | Location | Work product list | Description |
 | ---- | -------- | ----------------- | ----------- |
+| Quality plan     | GitHub | /project/ProjectMasterPlan.md | THIS document.
+| Quality evidence |        |
 
-#### 6.1.2. Project-related work products
+#### 6.1.4. Project Management
 
 | Name | Location | Work product list | Description |
 | ---- | -------- | ----------------- | ----------- |
-| ProjectMasterPlan | GitHub - ghost repository | /project/ProjectMasterPlan.md | THIS document.
+| Project master plan | GitHub | /project/ProjectMasterPlan.md | THIS document.
 
-### 6.2. Work product Traceability
+### 6.2. Operation rules
 
-- トレーサビリティを確立する手段を計画する。
-  - rectifyを使用する。詳細情報はサーバー参照。
-  - サーバー： 192.168.xxx.xxx
+1. 本プロジェクトの記録管理は、Ghost processのWork product managementプロセスを採用する。
+2. プロダクトリポジトリとプロジェクトリポジトリとを、単一のGitリポジトリ（`ghost`）で制御する。
+   - 後日分離する。
 
-### 6.3. Configuration management
+#### 6.2.1. GitHub `ghost` repository
 
-#### 6.3.1. Overview
-
-1. 本プロジェクトの構成管理は、Ghost processのWork product managementプロセスを採用する。
-2. 本プロジェクトはProduct variantsのない単一の製品ラインで構成されるため、Ghost processのWork product management processに定めるブランチ戦略をデフォルトのまま採用する。
-3. プロダクトリポジトリとプロジェクトリポジトリとを、単一のGitリポジトリ（`ghost`）で制御する。
-
-#### 6.3.2. `ghost` repository
-
-##### 6.3.2.1. Responsibilities
-
-- 本プロジェクトのプロダクト成果物およびプロジェクト成果物の構成制御を行う。
-
-1. プロダクト成果物
-   - 事前検討・分析などのための資料を除く、設計文書・プロセス文書。
-     - 最終プロダクトであるプロセス文書を起点にWhat-Howのトレーサビリティ関連にある上流文書全てを含む。
-     - トレーサビリティ関連のうちWhyに相当する分析レポート、検証記録に相当するテスト結果・レビュー記録などは本リポジトリに含めず、別途関連を示して記録する。（`6.4. 記録管理`参照）
-
-2. プロジェクト成果物
-   - プロジェクトの計画・制御に関する文書で、チーム内外を問わず複数メンバーが参照するもの
-
-##### 6.3.2.2. Tools and Repositories
-
-1. ツールとして、GitHubを使用する。→ TALとしてGitHubプラグインを使用する。
-2. 右記のリポジトリを使用する。→ https://github.com/tyskdm/ghost
-
-##### 6.3.2.3. Criteria for configuration items
-
-- Work product Listに示す。
-
-##### 6.3.2.4. Naming conventions
-
-- Work product Listに示す。
-
-##### 6.3.2.5. Access rights
+##### 6.2.1.1. Access
 
 | Rights | Person | Memo |
-| ------ | ------ | ---------------- |
-| Administrator | tyskdm       | Menber Controll, Backup and restore
-| User          | Team menber  | ブランチごとのアクセス権は`6.2.2.7. Branch definitions`に示す。
-| Viewer        | Stakeholders |
+| ------ | ------ | ---- |
+| Administrator | tyskdm             | Menber Controll, Backup and restore
+| User          | Software Engineers |
+| Viewer        | Stakeholders       |
 
-##### 6.3.2.6. Branching model and Workflow
+##### 6.2.1.2. Branching model
 
-###### 6.3.2.6.1. Branching model
+[Gitfow](https://www.google.co.jp/search?q=gitflow+workflow)をカスタマイズなしで採用する。
 
-本リポジトリは、ブランチモデルとして[Gitfow](https://www.google.co.jp/search?q=gitflow+workflow)を採用する。
+| Branch | Owner | Rules / Acceptance criteria | Description |
+| ------ | ----- | --------------------------- | ----------- |
+| master    | tyskdm             | MasterBranchAcceptanceCriteria.md  | 公開用ブランチ。pumlダイアグラムのpng出力を含み、github上で閲覧可能にしたもの。
+| develop   | tyskdm             | DevelopBranchAcceptanceCriteria.md | 開発ベースラインブランチ
+| feature/* | Software Engineers | FeatureBranchCommitRules.md        | コミット時のルール、コミットメッセージルール
+| release/* | Software Engineers | ReleaseBranchOperatingRules.md     | Rleaseブランチ運用ルール。権限、プロセス。
+| hotfix/*  | Software Engineers | HotfixBranchOperatingRules.md      | Hotfixブランチ運用ルール。権限、プロセス。
 
-###### 6.3.2.6.2. Branching workflow
+##### 6.2.1.3. Branching workflow
 
-Gitflowの基本ワークフローに加え、Ghostプロセスの[Work product management process](https://github.com/tyskdm/ghost)に従う。
+Ghostプロセスの[Work product management process](https://github.com/tyskdm/ghost)をカスタマイズなしで採用する。
 
-##### 6.3.2.7. Branch definitions
+1. developを開発ベースラインブランチとする。
+   - すべてのコミットが開発ベースラインとなる。
+   - バージョン付番せず、コミットIDで識別する。
+   - 開発ベースラインとしての受入れ基準を満たすことを受入れレビューで検証する。
 
-| Branch | Owner | Rules or Acceptance criteria | Memo |
-| ------ | ----- | ------------------- | ---- |
-| master    | tyskdm | MasterBranchAcceptanceCriteria.md | 公開用ブランチ。pumlダイアグラムのpng出力を含み、github上で閲覧可能にしたもの。
-| develop   | tyskdm | DevelopBranchAcceptanceCriteria.md | 開発ベースラインブランチ
-| feature/* | Software Engineers | FeatureBranchCommitRules.md | コミット時のルール、コミットメッセージルール
-| release/* | Software Engineers | ReleaseBranchOperatingRules.md | Rleaseブランチ運用ルール。権限、プロセス。
-| hotfix/*  | Software Engineers | HotfixBranchOperatingRules.md | Hotfixブランチ運用ルール。権限、プロセス。
+2. masterをリリースベースラインブランチとする。
+   - リリース時にpngを画像化するなどGitHubで閲覧可能な状態にしたリリースバージョンを保持する。
+   - バージョン番号を付与する。
+   - バージョンはセマンティックバージョニングを採用する。→ ルール解釈はGhostに従う。
 
-- TODO: Baselineブランチの受入れ基準、レビューアーの定義必要
-- [ ] ブランチ命名ルール
-- [ ] コミットメッセージルール
-- [ ] バージョニングルール
+3. feature/* 運用は以下のルールに従う。
+   - ブランチアウト
+     - 課題チケットなしにブランチをつくらない。
+     - 基本的には1チケット1ブランチで、ひとつの課題への対応を行う。
+     - ブランチ名にチケットIDを含める（今のところ自動化は行っていないが、関連を識別するため）
 
-#### 6.3.3. Status reporting
+   - コミット
+     - コミットメッセージには、Prefixを含める。
+     - マージリクエスト前に掃除する前提で暫定コミットをつくってよい。
 
-##### 6.3.3.1. Process status measure
+   - マージリクエスト準備
+     - 検証チェックリストに基づき事前検証を行い、結果を記録する。
+     - 歴史をキレイにする。無理に減らす必要はない。
+     - リベースする。
 
-- Ghost processのWork product management processに従う。
+   - マージリクエスト
+     - コメントに、レビューチェックリストをコピペする
+     - 検証記録への参照を記載する
+
+4. release/*
+   - リリース計画に基づき、developブランチから分岐する。
+   - 計画にあらかじめ定めた課題をクリアする。
+   - マージリクエストを発行する。
+
+##### 6.2.1.4. Publication and Notification
+
+1. リポジトリは公開とし、アクセス権制御を行わない。
+2. 通知は、GitHubのウォッチ機能を使用する。
+   - 通知を受け取りたい本人が任意でウォッチする。
+
+##### 6.2.1.5. Status reporting
+
+1. First half phaseでは、なにもしない。
+2. Half time phaseで、ステータス監視基準の設定を行う。
+3. Second half phaseで、段階的に管理レベルを引き上げる。
+
+###### 6.2.1.5.1. Process status measure
 
 > - Defines measurements used to determine the status of the  configuration management activities.
 >   - [ ] 構成管理活動のステータスを決定するために使用する測定項目を定義している
 >   - [ ] 構成管理監査基準を定義している
 
-##### 6.3.3.2. Monitoring and Reporting
+###### 6.2.1.5.2. Monitoring and Reporting
 
-- [ ] 構成管理部門によって承認されている
-- [ ] 制御された品目のステータスおよび履歴を示した管理記録およびステータス報告が含まれている
+> - [ ] 構成管理部門によって承認されている
+> - [ ] 制御された品目のステータスおよび履歴を示した管理記録およびステータス報告が含まれている
 
-### 6.4. Record management
+##### 6.2.1.6. Backup and Restore
 
-#### 6.4.1. Overview
+1. GitHub状のマスターリポジトリのクローンをローカルマシン側で保持し、クラウドストレージに複製することでバックアップする。
+2. Repository Adminが実施する。
 
-1. 本プロジェクトの記録管理は、Ghost processのWork product managementプロセスを採用する。
-2. 本プロジェクトの記録管理対象には、大きく以下の3種がある。
-   1. 要件分析資料 → Google drive
-   2. ベースライン受入れレビュー記録・承認記録 → GitHub（プルリクエスト）
-   3. 課題記録・対応活動記録 → ITS
+#### 6.2.2. Google drive `Ghost` folder
 
-#### 6.4.2. Google drive `Ghost` folder
-
-##### 6.4.2.1. Responsibilities
-
-- 本プロジェクトSYS.1における要件分析資料を記録管理する。
-- 対象は、設計に影響を与える全ての文書。
-  - 構成管理された製品成果物から、トレーサビリティ記録で参照されている全ての文書を含む。
-  - 事前検討メモなど上記に該当しないもののうち、設計検討過程の理解に役立つと考えられるものは積極的に含める。
-
-##### 6.4.2.2. Tools and Repositories
-
-1. ツールとして、Google drive（Spreadsheet）を使用する。→ TALとしてGoogle driveプラグインを使用する。
-2. 右記のフォルダを使用する。→ [Ghost](https://drive.google.com/drive/folders/1tKrJnmt2DNWR0v39NFvDqSdUYOpNzi8w)
-
-##### 6.4.2.3. Criteria for Record items
-
-- Work product Listに示す。
-
-##### 6.4.2.4. Naming conventions
-
-- Work product Listに示す。
-
-##### 6.4.2.5. Access rights
+##### 6.2.2.1. Access
 
 | Rights | Person | Memo |
 | ------ | ------ | ---------------- |
@@ -587,24 +569,23 @@ Gitflowの基本ワークフローに加え、Ghostプロセスの[Work product 
 | User          | Team menber  |
 | Viewer        | Stakeholders |
 
-##### 6.4.2.6. Workflow
+##### 6.2.2.2. Workflow
 
 Ghostプロセスの[Work product management process](https://github.com/tyskdm/ghost)に従う。
 
-#### 6.4.3. Status reporting
+##### 6.2.2.3. Publication and Notification
 
-##### 6.4.3.1. Process status measure
+##### 6.2.2.4. Status reporting
 
-- Ghost processのWork product management processに従う。
+1. First half phaseでは、なにもしない。
+2. Half time phaseで、ステータス監視基準の設定を行う。
+3. Second half phaseで、段階的に管理レベルを引き上げる。
 
-> - Defines measurements used to determine the status of the  configuration management activities.
->   - [ ] 構成管理活動のステータスを決定するために使用する測定項目を定義している
->   - [ ] 構成管理監査基準を定義している
+###### 6.2.2.4.1. Process status measure
 
-##### 6.4.3.2. Monitoring and Reporting
+###### 6.2.2.4.2. Monitoring and Reporting
 
-- [ ] 構成管理部門によって承認されている
-- [ ] 制御された品目のステータスおよび履歴を示した管理記録およびステータス報告が含まれている
+##### 6.2.2.5. Backup and Restore
 
 <br>
 
