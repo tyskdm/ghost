@@ -1,0 +1,52 @@
+' # [@ CRM] Change Request Management
+'
+' ## [@ PUML] Plant UML Diagrams
+'
+'
+' ### 4.2. [@activity] Plan
+'
+@startuml Plan
+
+!include style.iuml
+
+' Roles
+| Project Manager |
+| Deliverables |
+
+' Activities
+| Project Manager |
+start
+
+stop
+
+@enduml
+
+' ### Status model 作業中
+'
+@startuml StatusModel
+
+!include style.iuml
+
+state "S1. Open" as OP
+[*] --> OP : A1. CreateTicket()
+
+state "S2. Requirements Confirmation" as RC
+OP --> RC
+
+state "S3. Requirements Analysis" as RA
+RC --> RA
+
+RA --> RA : Not\nApproved
+
+state "S4. Doing" as Doing
+RA --> Doing : Approved
+
+state "S5. Done" as Done
+Doing --> Done
+
+RA --> Done : Reject\nApproved
+
+Done --> [*] : A2. CloseTicket()
+
+@enduml
+
