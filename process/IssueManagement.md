@@ -18,23 +18,16 @@ Process roles, Work products, Activitiesの各項目はDescriptionに示す考�
     - [1.4.1. Hierarchy](#141-hierarchy)
     - [1.4.2. Work package](#142-work-package)
   - [1.5. Issue types and Plugin types](#15-issue-types-and-plugin-types)
-  - [1.6. Issue management process lifecycle](#16-issue-management-process-lifecycle)
-    - [1.6.1. Project management lifecycle](#161-project-management-lifecycle)
-    - [1.6.2. initiate()](#162-initiate)
-    - [1.6.3. plan()](#163-plan)
-    - [1.6.4. execute()](#164-execute)
-    - [1.6.5. monitor()](#165-monitor)
+  - [1.6. Application Process Interface](#16-application-process-interface)
 - [2. PROCESS ROLES](#2-process-roles)
   - [2.1. [@role] Activity Caller](#21-role-activity-caller)
   - [2.2. [@role] System Administrator](#22-role-system-administrator)
 - [3. WORK PRODUCTS](#3-work-products)
-  - [3.1. [@workproduct] Work product management plan](#31-workproduct-work-product-management-plan)
-  - [3.2. [@workproduct] Work products list](#32-workproduct-work-products-list)
+  - [3.1. [@workproduct] Issue management plan](#31-workproduct-issue-management-plan)
 - [4. ACTIVITIES](#4-activities)
   - [4.1. [@activity] Initiate](#41-activity-initiate)
   - [4.2. [@activity] Plan](#42-activity-plan)
   - [4.3. [@activity] Monitor](#43-activity-monitor)
-  - [4.4. [@ CRM] Change Request Management](#44--crm-change-request-management)
 - [5. APPENDIX](#5-appendix)
   - [5.1. 参考：Automotive SPICE V3.1の主要関連項目](#51-参考automotive-spice-v31の主要関連項目)
 
@@ -85,9 +78,9 @@ Ghostでは、ある課題に関する情報は全てチケットに記載する
 またチケットは、課題への活動に関する情報を記録する。
 課題に対応する活動の概要、その見積り、進捗ステータスが記録される。
 
-上記のとおりGhostではチケットに多くの課題情報を記録するが、これは以下の目的に基づく。
+上記のとおりGhostではチケットに多くの課題関連情報を記録するが、これは以下の目的に基づく。
 
-Automotive SPICEでは、ある活動（例えば追加機能の実装）が、なんの目的であるいは誰からの要求に基づいて、いつどのように実施されたかを記録したエビデンスが要求されている。
+Automotive SPICEでは、ある活動（例えば追加機能の実装）が、なんの目的であるいは誰からの要求に基づいて、いつどのように実施されたかを記録したエビデンス（要求から成果物への双方向トレーサビリティ）が要求されている。
 Ghostでは、それらを複数のドキュメントやシステムに分散させることなく、チケット情報（チケットへのコメントを含む）そのものをエビデンスとして採用する。
 
 チケットには以下の情報を含む。
@@ -175,30 +168,15 @@ Ghostは、汎用タイプの課題以外に、以下の課題タイプをあら
 
 また、アプリケーションプロセスは独自の課題タイプをプラグインタイプとして追加することができる。
 
-### 1.6. Issue management process lifecycle
+### 1.6. Application Process Interface
 
-課題管理プロセスの、プロジェクトマネジメントライフサイクル中での振舞い概要を示す。
+チケットによるプロセス実行の他に、変更依頼管理プロセス自身の制御のために以下のAPIを持つ。
 
-#### 1.6.1. Project management lifecycle
-
-Ghostでは、プロジェクトマネジメントライフサイクルモデルとしてPMBOKのモデルを採用している。
-以下参考に、Ghostのプロジェクト統合マネジメントプロセス・Main関数の、アクティビティフロー図を示す。
-
-| ![@fig.puml.activity ProjectIntegrationManagement.puml/Main](ProjectIntegrationManagement/Main.png) |
-| :-: |
-| fig.1.1 Project integration management 'Main' activity flow
-
-#### 1.6.2. initiate()
-
-- ITSの運用を開始する
-- Ticketのフィールドや状態遷移のカスタマイズが可能なITSの場合は、規定タイプ用のチケットタイプを用意する。
-
-#### 1.6.3. plan()
-
-- Issue type毎の運用を計画する（プロジェクト固有の設定を行う）。
-- アプリケーション固有のチケットタイプを追加する。
-
-#### 1.6.4. execute()
+| Activity name | Description |
+| ------------- | ----------- |
+| [Initiate](#41-activity-initiate) | 課題管理基本計画を立案し、運用開始する。
+| [Plan](#42-activity-plan)         | 課題管理基本計画を立案し、運用開始する。
+| [Monitor](#43-activity-monitor)   | 課題管理の運用状況を取得する。これを定期的に実行することで監視を行う。
 
 - 課題の登録
   - 一般に外部からのStimulus（刺激）によって実行される。  
@@ -206,10 +184,6 @@ Ghostでは、プロジェクトマネジメントライフサイクルモデル
 - 活動の実施
   - プロジェクトマネジメントプロセスにより課題にリソースが割り当てられ、活動が実施される。
   - 状態遷移はチケット種別による。
-
-#### 1.6.5. monitor()
-
-- プロセス運用度合いを監視する。
 
 <br>
 
@@ -231,17 +205,11 @@ Ghostでは、プロジェクトマネジメントライフサイクルモデル
 
 ## 3. WORK PRODUCTS
 
-### 3.1. [@workproduct] Work product management plan
+### 3.1. [@workproduct] Issue management plan
 
 | @id | Name | Description |
 | --- | ---- | ----------- |
-| WMP | Work product management Master Plan | プロジェクトニーズに基づく作業成果物管理マスタープラン
-
-### 3.2. [@workproduct] Work products list
-
-| @id | Name | Description |
-| --- | ---- | ----------- |
-| WPL | Work Products List | 管理対象となる作業成果物のリスト。種別毎のテンプレート、検証基準などの情報が定義される。
+| IMP | Issue management Master Plan | プロジェクトニーズに基づく課題管理マスタープラン
 
 <br>
 
@@ -249,11 +217,14 @@ Ghostでは、プロジェクトマネジメントライフサイクルモデル
 
 ### 4.1. [@activity] Initiate
 
+- ITSの運用を開始する
+- Ticketのフィールドや状態遷移のカスタマイズが可能なITSの場合は、規定タイプ用のチケットタイプを用意する。
+
 #### _[@P] PURPOSE_ <!-- omit in toc -->
 
-1. Work product management基本計画計画の初期検討を行い、プロジェクト見積を可能にする。
-   - リポジトリの概ねの数と種類・規模を把握する
-2. プロジェクト計画書のためのリポジトリ運用を開始する。
+1. Issue management基本計画の初期検討を行い、プロジェクト見積を可能にする。
+   - ITS・サービスプランなどの選定と概ねのライセンス数を把握する。
+2. ITSの運用を開始する。
 
 #### _[@E] ENTRY CRITERIA / INPUT PARAMETER_ <!-- omit in toc -->
 
@@ -261,7 +232,7 @@ Ghostでは、プロジェクトマネジメントライフサイクルモデル
 
 #### _[@F] ACTIVITY FLOW_ <!-- omit in toc -->
 
-| ![@fig WPM.PUML::Initiate](WorkproductManagement/Initiate.png) |
+| ![@fig WPM.PUML::Initiate](IssueManagement/Initiate.png) |
 | :-: |
 | fig.4.1 'Initiate' activity flow
 
@@ -269,24 +240,23 @@ Ghostでは、プロジェクトマネジメントライフサイクルモデル
 
 | @id | Name | Description | Role |
 | :-: | ---- | ----------- | :--: |
-| T1  | プロジェクトの作業成果物の把握 | アプリケーションプロセスの基本計画から、プロジェクトを通じて作成される作業成果物を把握する。
-| T2  | リポジトリの使用計画 | 構成管理リポジトリおよび記録管理リポジトリをいくつ用意し、それぞれになにを保管するか計画する。<br>- プロジェクト基本計画書に記載する。
-| T3  | リポジトリの生成 | 各リポジトリを生成する：CreateRepository()
-| T4  | リポジトリ情報のプロジェクト基本計画書への登録 | プロジェクト基本計画書に、各リポジトリの情報を登録する。
+| T1  | プロジェクトの課題管理ニーズの把握 | アプリケーションプロセスの基本計画から、課題管理ニーズを把握する。
+| T2  | ITSの使用計画 | ITS（Issue Tracking System）として、どのツール・サービスプラン、アカウント数を使用するか計画化する。
+| T3  | ITSのプロジェクト生成 | ITSのプロジェクトを生成し、稼働開始する。
+| T4  | ITSのプロジェクト基本計画書への登録 | プロジェクト基本計画書に、ITSを登録する。
 
 #### _[@V] VERIFICATION_ <!-- omit in toc -->
 
 | @id | Name | Description | Role |
 | :-: | ---- | ----------- | :--: |
-| V1  | 作業成果物管理概要計画書のレビュー |
+| V1  | 課題管理概要計画書のレビュー |
 |     | @plugin | [PST.PM::Initiate](../plugins/SelectTable.md#activity-wpminitiate).V1();
 
 #### _[@D] DELIVERABLES_ <!-- omit in toc -->
 
 | @id | Name | Description |
 | :-: | ---- | ----------- |
-| D1  | Work product Management Outline plan | 作業成果物管理概要計画
-| D2  | Work product List | 作業成果物リスト
+| D1  | Issue Management Master plan | 課題管理基本要計画
 
 #### _[@Q] QUALITY RECORDS_ <!-- omit in toc -->
 
@@ -297,18 +267,19 @@ Ghostでは、プロジェクトマネジメントライフサイクルモデル
 
 | @id | Name | Description |
 | :-: | ---- | ----------- |
-| X1  | 作業成果物管理基本計画 |
+| X1  | 課題管理基本計画 |
 
 <br>
 
 ### 4.2. [@activity] Plan
 
+- Issue type毎の運用を計画する（プロジェクト固有の設定を行う）。
+- アプリケーション固有のチケットタイプを追加する。
+
 #### _[@P] PURPOSE_ <!-- omit in toc -->
 
-作業成果物管理基本計画を立案し、運用開始する。
-
-1. プロジェクト/プロセスで作成される作業成果物の要件および検証基準をWork product listに定義する。
-2. 構成管理リポジトリのブランチ定義、バージョニングルールなどを定義する。記録管理ルールを定義する。
+ITSの運用を計画する。
+また課題タイプ個別の運用計画を立案し、アプリケーション固有の課題タイプを登録する。
 
 #### _[@E] ENTRY CRITERIA / INPUT PARAMETER_ <!-- omit in toc -->
 
@@ -316,33 +287,33 @@ Ghostでは、プロジェクトマネジメントライフサイクルモデル
 
 #### _[@F] ACTIVITY FLOW_ <!-- omit in toc -->
 
-| ![[@fig:puml PUML.WPM::Initiate]](WorkproductManagement/Plan.png) |
+| ![[@fig:puml PUML.WPM::Initiate]](IssueManagement/Plan.png) |
 | :-: |
-| fig.4.1 'Initiate' activity flow
+| fig.4.2 'Plan' activity flow
 
 #### _[@T] TASKS_ <!-- omit in toc -->
 
 | @id | Name | Description | Role |
 | :-: | ---- | ----------- | :--: |
-| T1  | 作業成果物リストの更新 | アプリケーションプロセスの計画更新に応じて、各Work product Listを更新する。<br>必要に応じてリポジトリ配置の調整を行う。
+| T1  | 課題タイプ個別の運用計画を立案する。 | ./IssueTypes/ChangeRequestManagement::Plan()<br>./IssueTypes/ProblemManagement::Plan()
 |     | @plugin | [PST.SWE::Initiate](../plugins/SelectTable.md#activity-wpminitiate).T1();
-| T2  | リポジトリのバックアップ・復旧を計画し実行に移す | リポジトリごとの重要性・特性などに応じて、バックアップの頻度・タイミング、復旧テスト実施タイミングを決定する。<br>担当者をアサインし、運用を開始する。
+| T2  | アプリケーション固有の課題タイプを登録する | □ 登録手順を一般化する。
 |     | @plugin | [PST.SWE::Initiate](../plugins/SelectTable.md#activity-wpminitiate).T1();
-| T3  | 運用監視観点を定義する | アプリケーションプロセス（SQAプロセス）の計画に従い、モニタリング時の運用監視観点を定義する。<br>必要に応じてプロジェクトフェーズごとの段階的基準を設定する。
+| T3  | ITSのバックアップ・復旧を計画し実行に移す | ITSの重要性・特性などに応じて、バックアップの頻度・タイミング、復旧テスト実施タイミングを決定する。<br>担当者をアサインし、運用を開始する。
+|     | @plugin | [PST.SWE::Initiate](../plugins/SelectTable.md#activity-wpminitiate).T1();
+| T4  | 運用監視観点を定義する | アプリケーションプロセス（SQAプロセス）の計画に従い、モニタリング時の運用監視観点を定義する。<br>必要に応じてプロジェクトフェーズごとの段階的基準を設定する。
 |     | @plugin | [PST.SWE::Initiate](../plugins/SelectTable.md#activity-wpminitiate).T1();
 
 #### _[@V] VERIFICATION_ <!-- omit in toc -->
 
 | @id | Name | Description | Role |
 | :-: | ---- | ----------- | :--: |
-| V1  | プロジェクトマネジメント概要計画書のレビュー |
-|     | @plugin | [PST.PM::Initiate](../plugins/SelectTable.md#21-activity-initiate).V1();
 
 #### _[@D] DELIVERABLES_ <!-- omit in toc -->
 
 | @id | Name | Description |
 | :-: | ---- | ----------- |
-| D1  | Work product List | 作業成果物リスト
+| D1  | Issue management outline plan | 課題管理概要計画書
 
 #### _[@Q] QUALITY RECORDS_ <!-- omit in toc -->
 
@@ -353,7 +324,6 @@ Ghostでは、プロジェクトマネジメントライフサイクルモデル
 
 | @id | Name | Description |
 | :-: | ---- | ----------- |
-| X1  | 更新された作業成果物リスト | 新規登録された作業成果物は、その管理基準・検証基準が明示されていること。
 
 <br>
 
@@ -361,12 +331,12 @@ Ghostでは、プロジェクトマネジメントライフサイクルモデル
 
 | Id | Activity name | Description |
 | -- | ------------- | ----------- |
-| MON | Monitor       | 作業成果物管理の運用状況を取得する。
+| MON | Monitor       | 課題管理の運用状況を取得する。
 |     | @Note         | これを定期的に実行することで監視を行う。
 
 #### _[@P] PURPOSE_ <!-- omit in toc -->
 
-- Work product managementプロセスの運用ステータスを収集する。
+- Issue managementプロセスの運用ステータスを収集する。
 
 #### _[@E] ENTRY CRITERIA / INPUT PARAMETER_ <!-- omit in toc -->
 
@@ -374,17 +344,15 @@ Ghostでは、プロジェクトマネジメントライフサイクルモデル
 
 #### _[@F] ACTIVITY FLOW_ <!-- omit in toc -->
 
-| ![[@fig:puml PUML.WPM::Initiate]](WorkproductManagement/Monitor.png) |
+| ![[@fig:puml PUML.WPM::Initiate]](IssueManagement/Monitor.png) |
 | :-: |
 | fig.4.1 'Initiate' activity flow
-
-- SystemAdmin が実行することになっているが、ACでよいかもしれない。SQAアプリから呼ばれ、SQEによって実行されるかもしれないため。
 
 #### _[@T] TASKS_ <!-- omit in toc -->
 
 | @id | Name | Description | Role |
 | :-: | ---- | ----------- | :--: |
-| T1  | 作業成果物管理プロセス運用状況の取得 | 作業成果物管理プロセス基本計画に従い、運用状況を確認し、記録する。
+| T1  | 課題管理プロセス運用状況の取得 | 課題管理プロセス基本計画に従い、運用状況を確認し、記録する。
 |     | @plugin | [PST.SWE::Initiate](../plugins/SelectTable.md#activity-wpminitiate).T1();
 | T2  | 問題の識別と記録 | 運用状況が基本計画に定めた基準に満たない場合、問題点を識別して記録する。<br>補足：課題管理プロセス::問題管理チケットを発行する。
 |     | @plugin | [PST.SWE::Initiate](../plugins/SelectTable.md#activity-wpminitiate).T1();
@@ -393,14 +361,11 @@ Ghostでは、プロジェクトマネジメントライフサイクルモデル
 
 | @id | Name | Description | Role |
 | :-: | ---- | ----------- | :--: |
-| V1  | プロジェクトマネジメント概要計画書のレビュー |
-|     | @plugin | [PST.PM::Initiate](../plugins/SelectTable.md#21-activity-initiate).V1();
 
 #### _[@D] DELIVERABLES_ <!-- omit in toc -->
 
 | @id | Name | Description |
 | :-: | ---- | ----------- |
-| D1  | Work product List | 作業成果物リスト
 
 #### _[@Q] QUALITY RECORDS_ <!-- omit in toc -->
 
@@ -411,65 +376,6 @@ Ghostでは、プロジェクトマネジメントライフサイクルモデル
 
 | @id | Name | Description |
 | :-: | ---- | ----------- |
-| X1  | 更新された作業成果物リスト | 新規登録された作業成果物は、その管理基準・検証基準が明示されていること。
-
-<br>
-
-### 4.4. [@ CRM] Change Request Management
-
-> - 変更依頼管理プロセスの目的は、変更依頼が管理され、追跡され、実装されることを確実にすることである。
->   - (1) 変更依頼管理戦略が策定されている。
->   - (2) 変更に対する依頼が記録され、識別されている。
->   - (3) 他の変更依頼との依存性および関係性が識別されている。
->   - (4) 変更依頼の実装内容を確認するための基準が定義されている。
->   - (5) 変更に対する依頼が分析され、リソース要件が見積られている。
->   - (6) 変更が、分析結果および利用可能なリソースに基づいて優先順位を付けられ、承認されている。
->   - (7) 承認された変更が実装され、終結まで追跡されている。
->   - (8) すべての変更依頼のステータスが把握されている。
->   - (9) **双方向トレーサビリティが、変更依頼と影響を受ける作業成果物との間で確立されている。**
-
-#### _[@P] PURPOSE_ <!-- omit in toc -->
-
-#### _[@E] ENTRY CRITERIA / INPUT PARAMETER_ <!-- omit in toc -->
-
-1. プロジェクト基本計画書
-
-#### _[@F] ACTIVITY FLOW_ <!-- omit in toc -->
-
-| ![[@fig:puml PUML.WPM::Initiate]](WorkproductManagement/CreateRepository.png) |
-| :-: |
-| fig.4.1 'CreateRepository' activity flow
-
-#### _[@T] TASKS_ <!-- omit in toc -->
-
-| @id | Name | Description | Role |
-| :-: | ---- | ----------- | :--: |
-| T1  | リポジトリの種別・ツール・対象管理品目を定義する | - 構成管理用か、記録管理用か<br>   - ツールはなにか： GitHub/GitLab/BitBucket...、File Server/Confluence/WiKi/Google drive...<br>   - 管理対象品目はなにか<br>   - 以上を基本計画書に記載する。
-|     | @plugin | [PST.SWE::Initiate](../plugins/SelectTable.md#activity-wpminitiate).T1();
-|
-#### _[@V] VERIFICATION_ <!-- omit in toc -->
-
-| @id | Name | Description | Role |
-| :-: | ---- | ----------- | :--: |
-| V1  | プロジェクトマネジメント概要計画書のレビュー |
-|     | @plugin | [PST.PM::Initiate](../plugins/SelectTable.md#21-activity-initiate).V1();
-
-#### _[@D] DELIVERABLES_ <!-- omit in toc -->
-
-| @id | Name | Description |
-| :-: | ---- | ----------- |
-| D1  | Work product List | 作業成果物リスト
-
-#### _[@Q] QUALITY RECORDS_ <!-- omit in toc -->
-
-| @id | Name | Owner | Description |
-| :-: | ---- | :---: | ----------- |
-
-#### _[@X] EXIT CRITERIA / OUTPUT PARAMETER_ <!-- omit in toc -->
-
-| @id | Name | Description |
-| :-: | ---- | ----------- |
-| X1  | 更新された作業成果物リスト | 新規登録された作業成果物は、その管理基準・検証基準が明示されていること。
 
 <br>
 

@@ -1,0 +1,104 @@
+' # [@ IM] Issue Management
+'
+' ## [@ PUML] Plant UML Diagrams
+'
+' ### 4.1. [@activity] Initiate
+'
+@startuml Initiate
+
+!include style.iuml
+
+' Roles
+| Activity Caller |
+| Deliverables |
+
+' Activities
+| Activity Caller |
+start
+
+repeat;
+
+    :T1.\tプロジェクトの課題管理ニーズの把握;
+
+    :T2.\tITSの使用計画;
+
+    :T3.\tITSのプロジェクト生成;
+
+    :T4.\tITSのプロジェクト基本計画書への登録;
+    | Deliverables |
+        note right
+        D1. Issue management Outline plan
+        end note
+    | Activity Caller |
+
+repeat while (\n V1.\t課題管理基本計画書のレビュー\n) is (NotOK)
+
+stop
+
+@enduml
+
+'
+' ### 4.2. [@activity] Plan
+'
+@startuml Plan
+
+!include style.iuml
+
+' Roles
+| Activity Caller |
+| Deliverables |
+
+' Activities
+| Activity Caller |
+start
+
+:T1.\t課題タイプ個別の運用計画を立案する;
+
+:T2.\tアプリケーション固有の課題タイプを登録する;
+
+:T3.\tITSのバックアップ・復旧を計画し実行に移す;
+
+:T4.\t運用監視観点を定義する;
+| Deliverables |
+    note right
+    D1. Issue management Outline plan
+    end note
+| Activity Caller |
+
+stop
+
+@enduml
+
+'
+' ### 4.3. [@activity] Motnitor
+'
+@startuml Monitor
+
+!include style.iuml
+
+' Roles
+| SystemAdministrator |
+| Deliverables |
+
+' Activities
+| SystemAdministrator |
+start
+
+:T1.\t課題管理プロセス\n\t運用状況の取得;
+| Deliverables |
+    note right
+    Q1.\tWork product management
+       \tStatus report
+    end note
+| SystemAdministrator |
+
+:T2.\t問題の識別と記録;
+| Deliverables |
+    note right
+    Q2.\tProblem record
+    end note
+| SystemAdministrator |
+
+stop
+
+@enduml
