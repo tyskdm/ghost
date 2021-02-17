@@ -1,0 +1,193 @@
+' # [@ GHOST.PIM] Project Integration Management Process
+'
+' ### 4.1. [@activity] Main
+'
+@startuml Main
+
+!include style.iuml
+
+' Roles
+| Project Manager |
+| Work products |
+
+' Activities
+| Project Manager |
+
+start
+
+:T1. Initiate( );
+| Work products |
+    note right
+    D1. Project Master Plan
+    Q1. Project Estimation Record
+    ----
+    - Initial version
+    end note
+| Project Manager |
+
+repeat
+    :T2. Plan( );
+
+    | Work products |
+        note right
+        D2. Project Master Plan
+        Q2. Project Estimation Record
+        ----
+        - Updated version
+        end note
+    | Project Manager |
+
+    repeat  :T3. Execute( );
+        :T4. Monitor( );
+        | Work products |
+            note right
+            Q3. Project Status Report
+            ----
+            - Created at T4 and T5
+            end note
+        | Project Manager |
+
+        if (\n V1. Goals are achieved? \n) then (Yes)
+            (e)
+        else (No)
+        endif
+
+    repeat while (\n V2. Deviation? \n) is (No)
+
+backward :T5. Control( );
+
+repeat while ( ) is (deviation from the plan)
+detach
+
+:T6. onExit<
+
+(e)
+
+:T7. Close( );
+
+| Work products |
+    note right
+    D3. Project Closure Report
+    end note
+| Project Manager |
+
+stop
+
+@enduml
+
+
+'
+' ### 4.2. [@activity] Initiate
+'
+@startuml Initiate
+
+!include style.iuml
+
+' Roles
+| Project Manager |
+| Work products |
+
+' Activities
+| Project Manager |
+start
+
+:T1. Define the project;
+| Work products |
+    note right
+    D1. Project Master Plan
+    ----
+    * Includes Poject charter
+    end note
+| Project Manager |
+
+repeat
+repeat
+
+partition "Application" {
+    fork
+        :T2. SWE::Initiate();
+    fork again
+        :T3. SQA::Initiate();
+    fork again
+        :T4. PM::Initiate();
+    endfork
+}
+
+partition "Middleware" {
+    fork
+        :T5. WPM::Initiate();
+    fork again
+        :T6. ISM::Initiate();
+    endfork
+}
+
+repeat while (\n V1. Evaluate feasibility of the //ProjectMasterPlan// \n) is (Not OK) not (OK)
+
+:T7. PM::Estimate(//ProjectMasterPlan//);
+| Work products |
+    note right
+    Q1. Project Estimation Record
+    ----
+    * Initial estimation
+    end note
+| Project Manager |
+
+repeat while (\n V2. GetApproval (\n\tProjectMasterPlan,\n\tProjectEstimationRecord ) \n) is (Rejected) not (Approved)
+
+:T8. Create the initial baseline
+    of //ProjectMasterPlan//;
+| Work products |
+    note right
+    D2. Project Master Plan
+    ----
+    * Initial version of //ProjectMasterPlan//
+    end note
+| Project Manager |
+
+stop
+
+@enduml
+
+'
+' ### 4.3. [@activity] Plan
+'
+@startuml Plan
+
+!include style.iuml
+
+' Roles
+| Project Manager |
+| Work products |
+
+' Activities
+| Project Manager |
+start
+
+repeat
+
+fork
+    :T1. Plan PM:
+fork again
+    :T2. Plan SWE;
+fork again
+    :T3. Plan SQA;
+endfork
+
+:T4. Adjust to integrate;
+| Work products |
+    note right
+    D2. Integrated Project Master Plan
+    ----
+    * Calling the method ""foo( )"" is prohibited
+    end note
+| Project Manager |
+
+repeat while (B1. OK?) is (No)
+
+:T5. Estimate the project;
+
+stop
+
+
+@enduml
+

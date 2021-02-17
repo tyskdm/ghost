@@ -1,0 +1,48 @@
+' #  Ghost process README
+' ## Overview
+'
+@startuml Ghost_Process_Orverview
+
+!include style.iuml
+
+package "Application Layer " as AL <<Frame>> {
+    ' package "Plugins " <<Frame>> {
+        object "SQA" as P_SQA <<Plugin>>
+        object "SW Engineering" as P_SWE <<Plugin>>
+        object "Scrum" as P_SCRUM <<Plugin>>
+    ' }
+
+    ' package "Skelton " as S <<Frame>> {
+        object "SQA" as SQA <<Skelton>>
+        object "SW Engineering" as SWE <<Skelton>>
+        object "Project managment" as PM <<Skelton>>
+    ' }
+
+    P_SQA --> SQA
+    P_SWE --> SWE
+    P_SCRUM --> PM
+}
+
+package "Middleware Layer " as MWL <<Frame>> {
+    object "Work product management" as WPM
+    object "Issue management" as ISM
+}
+
+PM --> WPM
+PM --> ISM
+SWE --> WPM
+SWE --> ISM
+SQA --> WPM
+SQA --> ISM
+
+package "Tool Abstraction Layer " as TAL <<Frame>> {
+    object "Git Hosting Service" as GHS <<Plugin>>
+    object "Issue Tracking System" as ITS <<Plugin>>
+    object "Strage" as STR <<Plugin>>
+}
+
+WPM <-- STR
+WPM <-- GHS
+ISM <-- ITS
+
+@enduml

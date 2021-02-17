@@ -1,0 +1,51 @@
+' # [@ GHOST.PM] Project Management Process
+'
+' ### 4.1. [@activity] Initiate
+'
+@startuml Initiate
+
+!include style.iuml
+
+' Roles
+| Project Management Officer |
+| Deliverables |
+
+' Activities
+| Project Management Officer |
+start
+
+repeat  :T1. プロジェクト情報の収集;
+
+    :T2. プロジェクトマネジメント概要計画の策定;
+    | Deliverables |
+        note right
+        D1. Project management Outline plan
+        ----
+        * A part of //ProjectMasterPlan//
+        end note
+    | Project Management Officer |
+
+    repeat while (\n V1. プロジェクトマネジメント概要計画書のレビュー\n) is (NotOK)
+stop
+
+@enduml
+
+'
+' ### 4.2. [@activity] Plan
+'
+@startuml Plan
+
+!include style.iuml
+
+' Roles
+| Project Manager |
+| Deliverables |
+
+' Activities
+| Project Manager |
+start
+
+stop
+
+@enduml
+

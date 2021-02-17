@@ -1,0 +1,314 @@
+' # [@ WPM] Workproduct Management
+'
+' ## [@ PUML] Plant UML Diagrams
+'
+' ### 4.1. [@activity] Initiate
+'
+@startuml Initiate
+
+!include style.iuml
+
+' Roles
+| Activity Caller |
+| Deliverables |
+
+' Activities
+| Activity Caller |
+start
+
+repeat;
+
+    :T1.\tプロジェクトの作業成果物の把握;
+
+    :T2.\tリポジトリの使用計画;
+
+    :T3.\tリポジトリの生成;
+
+    :T4.\tリポジトリ情報のプロジェクト基本計画書への登録;
+    | Deliverables |
+        note right
+        D1. Work product management Outline plan
+        end note
+    | Activity Caller |
+
+repeat while (\n V1.\t作業成果物管理概要計画書のレビュー\n) is (NotOK)
+
+stop
+
+@enduml
+
+'
+' ### 4.2. [@activity] Plan
+'
+@startuml Plan
+
+!include style.iuml
+
+' Roles
+| Activity Caller |
+| Deliverables |
+
+' Activities
+| Activity Caller |
+start
+
+:T1.\t作業成果物リストの更新;
+
+:T2.\t追加リポジトリの生成;
+
+:T3.\tリポジトリのバックアップ・復旧を計画し実行に移す;
+
+:T4.\t運用監視観点を定義する;
+| Deliverables |
+    note right
+    D1. Work product management Outline plan
+    end note
+| Activity Caller |
+
+stop
+
+@enduml
+
+'
+' ### 4.3. [@activity] Motnitor
+'
+@startuml Monitor
+
+!include style.iuml
+
+' Roles
+| SystemAdministrator |
+| Deliverables |
+
+' Activities
+| SystemAdministrator |
+start
+
+:T1.\t作業成果物管理プロ\n\tセス運用状況の取得;
+| Deliverables |
+    note right
+    Q1.\tWork product management
+       \tStatus report
+    end note
+| SystemAdministrator |
+
+:T2.\t問題の識別と記録;
+| Deliverables |
+    note right
+    Q2.\tProblem record
+    end note
+| SystemAdministrator |
+
+stop
+
+@enduml
+
+'
+' ### 4.4. [@activity] CreateRepository
+'
+@startuml CreateRepository
+
+!include style.iuml
+
+' Roles
+| SystemAdministrator |
+| Deliverables |
+
+' Activities
+| SystemAdministrator |
+start
+
+:T1.\tリポジトリの種別・ツール・対象管理品目を定義する;
+| Deliverables |
+    note right
+    D1.\tProject Master Plan
+    end note
+| SystemAdministrator |
+
+:T2.\t作業成果物リストを作成し、運用ルールを定義する;
+| Deliverables |
+    note right
+    D2.\tWork product list
+    end note
+| SystemAdministrator |
+
+:T3.\tリポジトリを起動し作業成果物リストを登録する;
+
+stop
+
+@enduml
+
+'
+' ### 4.5. [@activity] CreateConfigurationItem
+'
+@startuml CreateConfigurationItem
+
+!include style.iuml
+
+' Roles
+| Activity Caller |
+| Deliverables |
+
+' Activities
+| Activity Caller |
+start
+
+:T1.\t作業成果物を作業成果物リストに追記する;
+| Deliverables |
+    note right
+    D2.\tWork product list
+    end note
+| Activity Caller |
+
+:T2.\t作業成果物をリポジトリへ保管する;
+
+stop
+
+@enduml
+
+'
+' ### 4.6. [@activity] DeleteConfigurationItem
+'
+@startuml DeleteConfigurationItem
+
+!include style.iuml
+
+' Roles
+| Activity Caller |
+| Deliverables |
+
+' Activities
+| Activity Caller |
+start
+
+:T1.\tアイテムをリポジトリから除去する;
+
+:T2.\t作業成果物リストの当該アイテム情報を更新する;
+| Deliverables |
+    note right
+    D2.\tWork product list
+    end note
+| Activity Caller |
+
+stop
+
+@enduml
+
+'
+' ### 4.7. [@activity] CreateBranch
+'
+@startuml CreateBranch
+
+!include style.iuml
+
+' Roles
+| Activity Caller |
+| Deliverables |
+
+' Activities
+| Activity Caller |
+start
+
+:T1.\tブランチ権限・基準の確認;
+
+:T2.\tブランチを作成する;
+
+stop
+
+@enduml
+
+'
+' ### 4.8. [@activity] BranchMergeRequest
+'
+@startuml BranchMergeRequest
+
+!include style.iuml
+
+' Roles
+| Activity Caller |
+| Branch Reviewer |
+| Branch Owner |
+| Deliverables |
+
+' Activities
+| Activity Caller |
+start
+
+:T1.\t事前検証を行う;
+
+:T2.\tMergeRequestを発行する;
+
+| Branch Reviewer |
+
+:T2.\tレビューの実施;
+
+| Branch Owner |
+
+:T2.\t差し戻し;
+
+| Branch Owner |
+
+:T2.\t承認とマージ;
+
+:T2.\tベースラインバージョンの付与;
+
+| Activity Caller |
+
+:T2.\t通知;
+
+stop
+
+@enduml
+
+'
+' ### 4.9. [@activity] CreateRecordItem
+'
+@startuml CreateRecordItem
+
+!include style.iuml
+
+' Roles
+| Activity Caller |
+| Deliverables |
+
+' Activities
+| Activity Caller |
+start
+
+:T1.\t作業成果物リストへの登録;
+
+:T2.\t作業成果物リストに従いレビューを実施する;
+
+:T3.\t作業成果物を記録する;
+
+:T4.\t通知先へ通知を行う;
+
+stop
+
+@enduml
+
+'
+' ### 4.10. [@activity] UpdateRecordItem
+'
+@startuml UpdateRecordItem
+
+!include style.iuml
+
+' Roles
+| Activity Caller |
+| Deliverables |
+
+' Activities
+| Activity Caller |
+start
+
+:T1.\t作業成果物リストに従いレビューを実施する;
+
+:T2.\t作業成果物を記録する;
+
+:T3.\t通知先へ通知を行う;
+
+stop
+
+@enduml
+

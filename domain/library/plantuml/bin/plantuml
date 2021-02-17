@@ -1,0 +1,5 @@
+#!/bin/bash
+export LANG=ja_JP.UTF-8;
+here=$(dirname $(readlink -f $0))
+iuml=$(dirname $here)/iuml
+java -Djava.io.tmpdir=/var/tmp -Djava.awt.headless=true -Dplantuml.include.path="$iuml" -jar $here/plantuml-jar-asl-1.2020.18/plantuml.jar -charset UTF-8 ${@}

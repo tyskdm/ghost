@@ -1,0 +1,137 @@
+= [@ SWRS] Software requirement specification
+
+== 1. [@ SWE] Software Engineering team
+
+=== 1.1. [@ FR] Functional Requirement
+
+==== 1.1.1. [@ REQ] Requirement Management
+
+- [ ] ここでの説明を開始するときには、すでにチケット駆動であることを宣言済みにしたい。
+- [ ] 全体構成をみながら方法を考える。→ SWRS の中でソリューションとして宣言するイメージ。
+
+
+[cols="1,1,4a"]
+.Refine Usecase-Description of Requirement Management
+|===
+| @Reqt ID | Name | Text
+
+.2+| UCD.01-G000
+|           | 要求を記録する（いつどこで、誰から）
+| @Trace    | @Copy SWRQ.SWE.UCD.REQ.PF.1-GH000
+
+    .2+| @Specification
+    | S01-G000      | 要求に関するエビデンスを、Ticket に添付するか、あるいは Strage に保管してリンクを張ることで保管する。
+    | @Rationale    | 要求に関するエビデンスがなんらかの形で記録されなければならないが、その記録形態は固定ではない。
+                      （たとえばあらかじめ定めた連絡票のケースもあれば、会議中のホワイトボードのコピーかもしれない） +
+                      変更の根拠として追跡・確認できればよいので、版歴管理は不要。Strage などへ保管し、Ticket から追跡可能にする。
+
+    .2+| @Specification
+    | S02-G000      | 要求に関するエビデンスには、要求元・日時・場所・受領者などの情報を含め、要求を特定可能にする。
+    | @Note         | 顧客との間に特定の要件管理インターフェースが設置されている場合、契約終了後の必要な期間（瑕疵担保責任期間や製品の市場ライフサイクル終了時などプロジェクト毎に異なる）まで追跡可能であるなら、
+                      そのIDのみでもよい。但し必要なメンバーに参照権限があることを保証すること。
+
+.2+| UCD.02-G000
+|           | 要求を分析し、対応策（仕様 / 代替スケジュール / 対抗案 など）を検討する
+| @Trace    | @Copy SWRQ.SWE.UCD.REQ.PF.2-GH000
+
+    .2+| @Specification
+    | S01-G000      | 要求を分析し、対応策（仕様 / 代替スケジュール / 対抗案 など）を検討・レビュー実施する。対応案を Ticket に記録する。
+    | @Note         | 対応策（案）は、要件の追加・変更、日程の変更・イベントの追加など、プロジェクト全般に渡る。
+                      対応策詳細や検討過程の文書がある場合は Storage など Ticket 外への保管でよい。リンクを張ること。
+
+.2+| UCD.03-G000
+|           | 受入れ可否判断を行う
+| @Trace    | @Copy SWRQ.SWE.UCD.REQ.PF.3-GH000
+
+    .1+| @Specification
+    | S01-G000      | PMが（あるいは存在する場合には CCB にて）対応案をレビューし、要求受入れ可否の判断を行う。
+                      結果を Ticket に記録する。
+
+.2+| UCD.04-G000
+|           | 対応案を依頼元および関連ステークホルダーへ伝達し合意形成する
+| @Trace    | @Copy SWRQ.SWE.UCD.REQ.PF.4-GH000
+
+    .1+| @Specification
+    | S01-G000      | 対応案を依頼元および関連ステークホルダーへ伝達し、合意内容を Ticket へ記録する。
+
+    .1+| @Specification
+    | S02-G000      | 対応案の影響度・複雑性などに応じて、伝達の手段として共同レビューを実施する。
+
+    .2+| @Specification
+    | S03-G000      | 対応案が受け入れられなかった場合、対応策の検討へ戻る。
+    | @Trace        | @Refine SWRQ.SWE.UCD.REQ.AF.1-GH000
+
+.2+| UCD.05-G000
+|           | 合意した対応案をプロジェクトへ反映させる（要件を追加・変更する、スケジュールを変更する、など）
+| @Trace    | @Copy SWRQ.SWE.UCD.REQ.PF.5-GH000
+
+    .2+| @Specification
+    | S01-G000      | 要件の追加・変更を含む場合、SWRQ もしくは SWRS 差分を引数に開発チケットを発行し、Ticket に記録を残す。
+    | @Note         | 開発を開始可能なだけの外部要件が揃っていることが発行前条件になる。
+
+    .2+| @Specification
+    | S02-G000      | プロジェクト計画の変更を含む場合、必要に応じてプロジェクト計画書を更新する。
+    | @Rationale    | プロジェクト計画書は Reposiotry で管理されている。WPマネジメントの更新手順に従う → WPM.Update(Project Plan)
+
+.2+| UCD.06-G000
+|           | 対応完了を関連ステークホルダーへ伝達する
+| @Trace    | @Copy SWRQ.SWE.UCD.REQ.PF.6-GH000
+
+    .1+| @Specification
+    | S01-G000      | UCD.04 での関連ステークホルダーとの合意に従い、対応完了を伝達する。
+                     （変更したソフトウェアがリリースされた時点で報告する、仕様が確定された時点で報告する、など）
+
+    .1+| @Specification
+    | S02-G000      | 伝達記録あるいは伝達記録へのリンクを Ticket へ保管する。
+
+|===
+
+
+
+== 2. [@ WPM] Work product management
+
+WPM.Init()
+
+WPM.Checkout()
+
+WPM.Checkin()
+
+WPM.Release()
+
+
+=== 1.1. [@ FR] Functional Requirement
+
+==== 1.1.1. [@ REQ] Requirement Management
+
+- [ ] ここでの説明を開始するときには、すでにチケット駆動であることを宣言済みにしたい。
+- [ ] 全体構成をみながら方法を考える。→ SWRS の中でソリューションとして宣言するイメージ。
+
+
+[cols="1,1,4a"]
+.Refine Usecase-Description of 
+|===
+| @Reqt ID | Name | Text
+
+.2+| UCD.01-G000
+|           | 要求を記録する（いつどこで、誰から）
+| @Trace    | @Copy SWRQ.SWE.UCD.REQ.PF.1-GH000
+
+    .2+| @Specification
+    | S01-G000      | 要求に関するエビデンスを、Ticket に添付するか、あるいは Strage に保管してリンクを張ることで保管する。
+    | @Rationale    | 要求に関するエビデンスがなんらかの形で記録されなければならないが、その記録形態は固定ではない。
+                      （たとえばあらかじめ定めた連絡票のケースもあれば、会議中のホワイトボードのコピーかもしれない） +
+                      変更の根拠として追跡・確認できればよいので、版歴管理は不要。Strage などへ保管し、Ticket から追跡可能にする。
+
+.2+| UCD.02-G000
+|           | 要求を分析し、対応策（仕様 / 代替スケジュール / 対抗案 など）を検討する
+| @Trace    | @Copy SWRQ.SWE.UCD.REQ.PF.2-GH000
+
+    .2+| @Specification
+    | S01-G000      | 要求を分析し、対応策（仕様 / 代替スケジュール / 対抗案 など）を検討・レビュー実施する。対応案を Ticket に記録する。
+    | @Note         | 対応策（案）は、要件の追加・変更、日程の変更・イベントの追加など、プロジェクト全般に渡る。
+                      対応策詳細や検討過程の文書がある場合は Storage など Ticket 外への保管でよい。リンクを張ること。
+
+|===
+
+
+
