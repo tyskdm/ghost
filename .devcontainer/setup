@@ -1,0 +1,2 @@
+#!/bin/bash
+cd /usr/local/bin && ln -s /workspaces/ghost/domain/library/plantuml/bin/plantuml .
